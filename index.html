@@ -31,7 +31,7 @@
           </form>
           <div class="hero-note">
             <span><span data-icon="circle-check" data-size="14"></span>No sign-up</span>
-            <span><span data-icon="circle-check" data-size="14"></span>No extension</span>
+            <span><span data-icon="circle-check" data-size="14"></span>Optional <a class="link-btn" href="downloads/sieve-extension.zip" download>Chrome extension</a></span>
             <span><span data-icon="circle-check" data-size="14"></span>Try it on <a class="link-btn" href="app.html?demo=1">demo data</a></span>
           </div>
         </div>
@@ -128,6 +128,30 @@
     <section class="section-tight" style="padding-top:0">
       <div class="container">
         <div class="card privacy-band"><span class="privacy-badge"><span data-icon="lock" data-size="14"></span>🔒 Runs in your browser — your data never leaves.</span><span class="muted text-sm">Scraping, detection and exports all happen locally. The optional proxy runs on your own machine.</span></div>
+      </div>
+    </section>
+
+    <!-- Chrome extension -->
+    <section class="section-tight" style="padding-top:0" id="extension">
+      <div class="container">
+        <div class="card card-pad ext-band">
+          <div class="ext-copy">
+            <span class="badge badge-primary">Chrome extension</span>
+            <h2>Scrape pages behind your login</h2>
+            <p class="muted">A website can't see the pages you are logged in to. The Sieve extension can: it reads the page in your own tab, shows a preview, and one click sends the full table here. It can scroll infinite feeds for you, and you can stop it any time.</p>
+            <div class="row row-wrap">
+              <a class="btn btn-gradient btn-lg" href="downloads/sieve-extension.zip" download id="ext-download"><span data-icon="download" data-size="16"></span>Download the extension</a>
+              <a class="btn btn-lg" href="docs.html#extension">How to install</a>
+            </div>
+            <p class="text-sm subtle">Free · Chrome / Edge / Brave · about 0.5 MB · only scrape what you are allowed to.</p>
+          </div>
+          <ol class="ext-steps">
+            <li><b>Download</b> and unzip the file.</li>
+            <li>Open <code>chrome://extensions</code> and switch on <b>Developer mode</b>.</li>
+            <li>Click <b>Load unpacked</b> and pick the <code>sieve-extension</code> folder.</li>
+            <li>Open any page, click the <b>Sieve</b> icon, then <b>Scrape this page</b>.</li>
+          </ol>
+        </div>
       </div>
     </section>
 

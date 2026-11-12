@@ -5,10 +5,13 @@
   "private": true,
   "license": "MIT",
   "main": "serve.js",
-  "engines": { "node": ">=18" },
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "start": "node serve.js",
-    "serve": "node serve.js"
+    "serve": "node serve.js",
+    "build:ext": "node scripts/build-extension.js"
   },
   "dependencies": {},
   "optionalDependencies": {

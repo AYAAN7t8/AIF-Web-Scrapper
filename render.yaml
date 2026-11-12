@@ -3,7 +3,7 @@ services:
     name: aif-web-scrapper
     runtime: node
     plan: free
-    buildCommand: npm install --no-audit --no-fund
+    buildCommand: npm install --no-audit --no-fund && npm run build:ext
     startCommand: npm start
     healthCheckPath: /api/health
     autoDeploy: true

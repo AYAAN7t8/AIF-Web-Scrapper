@@ -518,6 +518,27 @@
       });
     });
   }
+  /* The Sieve Chrome extension sends the page the user was viewing (with their login) to this site via
+     window.postMessage from its own injected script. Same-origin only; processed locally in this tab. */
+  var handedOff = 0;
+  function listenForExtension() {
+    window.addEventListener('message', function (e) {
+      if (e.source !== window || e.origin !== location.origin) return;
+      var d = e.data;
+      if (!d || d.type !== 'sieve-capture' || !d.payload || typeof d.payload.html !== 'string') return;
+      window.postMessage({ type: 'sieve-ack' }, location.origin);
+      var p = d.payload;
+      if (p.at && p.at === handedOff) return;                // already shown
+      handedOff = p.at || Date.now();
+      var id = Sieve.extractors.PRESETS[String(p.mode || '').toLowerCase()] || (MODES[p.mode] ? p.mode : null);
+      if (id) setMode(id, { silent: true });
+      $('#url-input').value = p.url || '';
+      Sieve.toast('Showing the page sent from the Sieve extension.', 'info', 3000);
+      run({ url: p.url || 'https://pasted.invalid/', html: p.html });
+    });
+    document.documentElement.setAttribute('data-sieve-ready', '1');   // tells the extension it can deliver now
+  }
+
   function initExtensionUi() {
     if (!Sieve.scraper.inExtension) return;
     document.documentElement.setAttribute('data-ext', '1');
@@ -715,6 +736,7 @@
     }
     if (params.get('pane') === 'bulk') setPane('bulk');
     initExtensionUi();
+    listenForExtension();
     if (params.get('ext') === '1') {
       takePendingCapture().then(function (p) {
         if (!p) return;

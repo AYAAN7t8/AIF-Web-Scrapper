@@ -1,0 +1,16 @@
+body { background: var(--bg); color: var(--text); margin: 0; font: 14px/1.5 var(--font-sans, Inter, system-ui, sans-serif); }
+.res-wrap { max-width: 960px; margin: 0 auto; padding: 28px 20px 48px; }
+.res-head { display: flex; gap: 12px; align-items: center; margin-bottom: 18px; }
+.res-head h1 { font-size: 20px; margin: 0; letter-spacing: -0.01em; }
+.res-head p { margin: 2px 0 0; font-size: 13px; }
+.res-card { padding: 0; overflow: hidden; }
+.res-state { padding: 40px 20px; text-align: center; color: var(--muted); }
+.res-table-wrap { overflow: auto; max-height: 52vh; }
+.res-table { border-collapse: collapse; width: 100%; font-size: 13px; }
+.res-table th, .res-table td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--border); white-space: nowrap; max-width: 260px; overflow: hidden; text-overflow: ellipsis; }
+.res-table th { position: sticky; top: 0; background: var(--surface); font-weight: 600; z-index: 1; }
+.res-table td.num { color: var(--muted); }
+.res-note { margin: 0; padding: 10px 14px; font-size: 12.5px; color: var(--muted); border-top: 1px solid var(--border); }
+.res-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+.res-hint { margin: 10px 0 0; font-size: 12.5px; color: var(--muted); }
+.res-hint[data-kind="error"] { color: #e5484d; }

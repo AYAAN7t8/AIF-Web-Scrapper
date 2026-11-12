@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sieve results</title>
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="results.css">
+  <script src="../js/theme-init.js"></script>
+</head>
+<body>
+  <main class="res-wrap">
+    <header class="res-head">
+      <img src="../assets/logo.svg" width="26" height="26" alt="">
+      <div>
+        <h1 id="title">Reading the page…</h1>
+        <p class="muted" id="sub">One moment.</p>
+      </div>
+    </header>
+
+    <section class="card res-card" id="card" aria-live="polite">
+      <div class="res-state" id="loading">Extracting data…</div>
+      <div class="res-state" id="empty" hidden></div>
+      <div id="table-wrap" class="res-table-wrap" hidden>
+        <table class="res-table" id="table"><thead></thead><tbody></tbody></table>
+      </div>
+      <p class="res-note" id="note" hidden></p>
+    </section>
+
+    <div class="res-actions" id="actions" hidden>
+      <button class="btn btn-gradient btn-lg" id="more" type="button">Click to view more</button>
+      <button class="btn btn-lg" id="csv" type="button">Download CSV</button>
+      <button class="btn btn-lg btn-ghost" id="editor" type="button">Open full editor here</button>
+    </div>
+    <p class="res-hint" id="hint" hidden></p>
+  </main>
+
+  <script src="config.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/extractors.js"></script>
+  <script src="../js/scraper.js"></script>
+  <script src="../js/export.js"></script>
+  <script src="results.js"></script>
+</body>
+</html>

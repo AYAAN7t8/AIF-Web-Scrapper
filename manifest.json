@@ -10,6 +10,8 @@
     "default_icon": { "16": "ext/icons/icon16.png", "32": "ext/icons/icon32.png", "48": "ext/icons/icon48.png" }
   },
   "icons": { "16": "ext/icons/icon16.png", "48": "ext/icons/icon48.png", "128": "ext/icons/icon128.png" },
+  "background": { "service_worker": "ext/background.js" },
   "permissions": ["activeTab", "scripting", "storage", "unlimitedStorage"],
+  "host_permissions": ["https://aif-web-scrapper.onrender.com/*"],
   "optional_host_permissions": ["http://*/*", "https://*/*"]
 }

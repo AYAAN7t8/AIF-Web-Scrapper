@@ -81,8 +81,12 @@ A website can never read your logged-in session on another site (browsers forbid
 
 **Use it**
 
-- **Scrape this page**: log in to the site as usual, open the page you want, click the Sieve icon, pick *Auto table*, *Emails*, … and press **Scrape this page**. Sieve reads the page exactly as rendered in your tab (so JavaScript-built pages and anything behind your login work), and opens the results with all the usual column editing and CSV/XLSX/Sheets export. Tick *Scroll to the bottom first* for infinite feeds.
-- **Fetch a link**: paste a URL in the popup and press Fetch. Click **Allow site access** once; after that Sieve fetches links with *your own cookies*, follows pagination (`Crawl all pages`) and runs Bulk, all as you.
+- **Scrape this page**: log in to the site as usual, open the page you want, click the Sieve icon, pick *Auto table*, *Emails*, … and press **Scrape this page**. Sieve reads the page exactly as rendered in your tab (so JavaScript-built pages and anything behind your login work).
+- **Results show in the extension first**: a preview of the first rows, **Download CSV**, and **Click to view more**, which opens the website (`SIEVE_SITE` in `ext/config.js`, default `https://aif-web-scrapper.onrender.com`) with the full table, column editing and CSV/XLSX/Sheets export. The page is handed over in your browser via `postMessage`; it is never uploaded to a server. *Open full editor here* does the same inside the extension, and there pagination crawling and Bulk keep using your login (the website cannot, because its server has no cookies).
+- **Scroll to the bottom first** loads infinite feeds. A panel on the page offers **Stop & use what loaded** and **Cancel** (Esc also stops), and the popup has the same two buttons. The work runs in a background worker, so closing the popup is safe.
+- **Fetch a link**: paste a URL in the popup and press Fetch. Click **Allow site access** once; after that Sieve fetches the link with *your own cookies*.
+
+**Download:** the home page has a *Download the extension* button (`downloads/sieve-extension.zip`, rebuilt by `npm run build:ext`, and on every Render deploy).
 
 **What it does not do:** it does not solve CAPTCHAs or bot checks, and it does not log in for you. If a site shows a check or a login wall, pass it yourself in a normal tab, then use *Scrape this page*. Only scrape pages and data you are allowed to use.
 

@@ -21,6 +21,12 @@
     <select id="mode" class="input"></select>
     <label class="pop-check"><input type="checkbox" id="autoscroll"> Scroll to the bottom first <span class="muted">(infinite feeds)</span></label>
     <button id="scrape" class="btn btn-primary pop-wide" type="button">Scrape this page</button>
+    <div id="running" class="pop-run" hidden>
+      <div class="pop-row">
+        <button id="stop" class="btn btn-sm" type="button">Stop &amp; use what loaded</button>
+        <button id="cancel" class="btn btn-sm btn-ghost" type="button">Cancel</button>
+      </div>
+    </div>
     <p class="pop-note">Reads the page in your current tab, exactly as you see it, including anything behind your login.</p>
   </section>
 

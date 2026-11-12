@@ -18,7 +18,7 @@
   <div id="site-nav"></div>
   <div class="container docs-layout">
     <nav class="docs-nav" id="docs-nav" aria-label="Documentation">
-      <a href="#quick-start">Quick Start</a><a href="#modes">Modes</a><a href="#pagination">Pagination</a><a href="#bulk">Bulk Scrape</a><a href="#export">Export</a><a href="#cors">CORS &amp; proxy</a><a href="#faq">FAQ</a>
+      <a href="#quick-start">Quick Start</a><a href="#modes">Modes</a><a href="#pagination">Pagination</a><a href="#bulk">Bulk Scrape</a><a href="#export">Export</a><a href="#extension">Chrome extension</a><a href="#cors">CORS &amp; proxy</a><a href="#faq">FAQ</a>
     </nav>
     <article class="docs-content">
       <section id="quick-start">
@@ -93,6 +93,22 @@
   return ContentService.createTextOutput(JSON.stringify({ ok: true, url: ss.getUrl() }))
     .setMimeType(ContentService.MimeType.JSON);
 }</code></pre>
+      </section>
+
+      <section id="extension">
+        <h2>Chrome extension</h2>
+        <p>A website cannot read pages you are logged in to; the extension runs in your own browser, so it can.</p>
+        <ol>
+          <li><a href="downloads/sieve-extension.zip" download>Download the extension</a> and unzip it.</li>
+          <li>Open <code>chrome://extensions</code> and switch on <strong>Developer mode</strong>.</li>
+          <li><strong>Load unpacked</strong> and choose the unzipped <code>sieve-extension</code> folder, then pin the Sieve icon.</li>
+          <li>Log in to the site, open the page you want, click the icon, choose what to extract and press <strong>Scrape this page</strong>.</li>
+        </ol>
+        <ul>
+          <li><strong>Scroll to the bottom first</strong> loads infinite feeds. A panel on the page has <em>Stop &amp; use what loaded</em> and <em>Cancel</em> (Esc also stops).</li>
+          <li>Results are previewed in the extension. <strong>Click to view more</strong> opens the full table on this site.</li>
+          <li>It does not solve CAPTCHAs or bot checks and never logs in for you. Only scrape what you are allowed to.</li>
+        </ul>
       </section>
 
       <section id="cors">

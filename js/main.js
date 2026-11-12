@@ -371,7 +371,8 @@
     ['scrapers.html', 'Built-in Scrapers', 'scrapers'],
     ['bulk.html', 'Bulk Scrape', 'bulk'],
     ['how-it-works.html', 'How It Works', 'how'],
-    ['docs.html', 'Docs', 'docs']
+    ['docs.html', 'Docs', 'docs'],
+    ['index.html#extension', 'Extension', 'ext']
   ];
 
   function themeButton() {

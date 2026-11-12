@@ -217,10 +217,10 @@ async function handleFetch(q, res) {
 const TYPES = {
   '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8',
   '.json': 'application/json', '.svg': 'image/svg+xml', '.png': 'image/png', '.ico': 'image/x-icon',
-  '.txt': 'text/plain; charset=utf-8', '.md': 'text/markdown; charset=utf-8'
+  '.txt': 'text/plain; charset=utf-8', '.md': 'text/markdown; charset=utf-8', '.zip': 'application/zip', '.png': 'image/png'
 };
 const ROOT = __dirname;
-const STATIC_BLOCK = /^\/(node_modules|\.|proxy-server|robots-|serve\.js|render\.yaml|package)/;
+const STATIC_BLOCK = /^\/(node_modules|\.|scripts|proxy-server|robots-|serve\.js|render\.yaml|package)/;
 
 function serveStatic(req, res, pathname) {
   let p;
@@ -230,7 +230,9 @@ function serveStatic(req, res, pathname) {
   if (!file.startsWith(ROOT + path.sep) || STATIC_BLOCK.test(p)) { res.writeHead(403); return res.end('Forbidden'); }
   fs.readFile(file, (err, data) => {
     if (err) { res.writeHead(404, { 'Content-Type': 'text/plain' }); return res.end('Not found'); }
-    res.writeHead(200, { 'Content-Type': TYPES[path.extname(file).toLowerCase()] || 'application/octet-stream', 'Cache-Control': 'no-cache' });
+    const headers = { 'Content-Type': TYPES[path.extname(file).toLowerCase()] || 'application/octet-stream', 'Cache-Control': 'no-cache' };
+    if (/\.zip$/i.test(file)) headers['Content-Disposition'] = 'attachment; filename="' + path.basename(file) + '"';
+    res.writeHead(200, headers);
     res.end(data);
   });
 }
