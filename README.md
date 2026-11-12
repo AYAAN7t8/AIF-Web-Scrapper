@@ -19,7 +19,11 @@ Open index.html         → demo data only; real sites need the server above (br
 
 ## Design
 
-Frost-and-slate palette with a single teal accent, one typeface (Switzer), one corner radius, flat colour fields instead of gradients, no resting shadows. The home page is composed around the product itself: a sentence split by a working frame, switch bands, one card across four fields, one row in three states. Tokens live in `css/theme.css`, the home composition in `css/home.css` and `js/home.js`. Light and dark themes share the same tokens. Museum pictures (public domain, credited in the footer) come from The Metropolitan Museum of Art.
+Black ground with four signal colours taken from the brand picture: coral `#FF5E57`, amber `#FCC55F` (tints `#DDAE50`, `#BC9441`), cyan `#32BFDA` (tints `#78D3E6`, `#A5DCE8`, `#D0EBF0`) and white. Dark is the default; the light theme keeps the same hues as pastel fields and deepens cyan to `#087B92` for text contrast. One typeface (Switzer), one corner radius, flat colour fields, no gradients and no resting shadows.
+
+Scroll motion lives in `css/motion.css` and `js/motion.js`: the hero dots drift with the reel, statements rise word by word, each feature band floods with its colour and flips its switch as it reaches the reading line, the four fields and their cards rise into place, the row states slide in from alternating sides, photographs wipe in and drift, proof numbers count up, and the closing blank opens like a shutter. Scrubbed parts use CSS scroll-driven animations (`animation-timeline: view()`) with a fade-up fallback; everything honours reduced motion.
+
+Photographs: free-to-use images from Pexels (credited in the page footer).
 
 ## Pages
 

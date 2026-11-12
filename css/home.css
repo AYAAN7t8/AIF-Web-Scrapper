@@ -24,7 +24,7 @@ body[data-page="home"] main { overflow-x: clip; }
 .hero { padding: 0; overflow: visible; position: relative; }
 .hero-track { position: relative; height: 230svh; }
 .hero-stage {
-  --fw: max(520px, 38vw); --fh: calc(var(--fw) * 9 / 16); --gap: 24px; --sl: 60px;
+  --fw: max(560px, 44vw); --fh: calc(var(--fw) * 9 / 16); --gap: 24px; --sl: 60px;
   position: sticky; top: var(--nav-h); height: calc(100svh - var(--nav-h)); min-height: 600px;
   display: grid; grid-template-columns: minmax(0, 1fr); overflow: hidden;
 }
@@ -178,7 +178,7 @@ body[data-page="home"] main { overflow-x: clip; }
 .proof { margin-top: clamp(96px, 12vw, 200px); }
 .tiles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
 .tile { margin: 0; aspect-ratio: 3 / 2; padding: 24px; border-radius: var(--radius-frame); background: var(--surface); display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; }
-.tile:nth-child(odd) { background: var(--field-1); }
+.tile:nth-child(even) { background: var(--elevated); }
 .tile b { font-size: clamp(22px, 2.1vw, 32px); font-weight: 600; letter-spacing: -0.03em; line-height: 1.1; overflow-wrap: anywhere; }
 .tile span { font-size: 17px; color: var(--text-2); }
 .tile-head { grid-column: span 2; background: var(--primary) !important; color: var(--on-primary); aspect-ratio: auto; }
@@ -292,7 +292,7 @@ body[data-page="home"] main { overflow-x: clip; }
 }
 
 /* hero sits on a flat colour field; the sentence hangs just above the frame's top edge */
-.hero-track { background: var(--field-1); }
+.hero-track { background: var(--bg); }
 .hero-h1 { transform: translateY(calc(-1 * (var(--fh) / 2 + 52px))); }
 
 /* band: on narrow screens sentence and switch share a row without overlapping */
@@ -314,3 +314,39 @@ body[data-page="home"] main { overflow-x: clip; }
   .why-gold img { position: absolute; inset: 0; }
   .why-gold { position: relative; }
 }
+
+
+/* ---------------------------------------------------------------- palette fit */
+:root { --ink-coral: #d6382f; --ink-amber: #9a6a00; --ink-cyan: #087b92; }
+[data-theme="dark"] { --ink-coral: #ff5e57; --ink-amber: #fcc55f; --ink-cyan: #32bfda; }
+
+.band[data-ink="on"] { color: var(--on-field); }
+.band[data-ink="on"] .band-c { color: var(--on-field); }
+.band[data-ink="on"] .sw { background: var(--on-field); }
+.band[data-ink="on"] .sw span { background: var(--field-4); }
+[data-theme="dark"] .band[data-ink="on"] .sw span { background: #fff; }
+
+.field, .field h2, .clause { color: var(--on-field); }
+.rc { color: var(--text); }
+
+.ext { color: var(--on-field); }
+.ext-copy h2, .ext-copy > p, .ext-steps { color: var(--on-field); }
+.ext .link-arrow { color: var(--on-field); }
+.ext .btn-primary { background: #0a0a0a; border-color: #0a0a0a; color: #fff; }
+.ext .btn-primary:hover { background: #262626; border-color: #262626; }
+.ext-steps code { background: rgba(10, 10, 10, .14); color: var(--on-field); }
+
+.tile em.n { font-style: normal; font-variant-numeric: tabular-nums; }
+.tile:nth-child(3n+2) em.n { color: var(--ink-coral); }
+.tile:nth-child(3n+3) em.n { color: var(--ink-amber); }
+.tile:nth-child(3n+4) em.n { color: var(--ink-cyan); }
+.tile span { color: var(--text-2); }
+.tile-head, .tile-head h2, .tile-head p { color: var(--on-primary); }
+
+.st-word { color: var(--muted); }
+.cta-form h2 button { color: var(--on-primary); }
+.fr-found { background: var(--primary-soft); }
+.hero-lede { color: var(--text-2); }
+
+/* the install steps sit straight on the amber field (an older rule gave the list its own dark box) */
+.ext .ext-steps { background: transparent; border: 0; border-radius: 0; padding: 0 0 0 22px; }

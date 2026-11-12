@@ -52,6 +52,7 @@
     if (shown !== target) raf = requestAnimationFrame(frameLoop); else raf = 0;
   }
   function onScroll() {
+    if (stage) stage.style.setProperty('--hp', progress().toFixed(3));   // drives the dots and the drifting halves
     if (!wide()) return;
     target = progress() * (N - 1);
     setActive(Math.round(target));

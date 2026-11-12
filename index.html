@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="css/pages.css">
   <link rel="stylesheet" href="css/theme.css">
   <link rel="stylesheet" href="css/home.css">
+  <link rel="stylesheet" href="css/motion.css">
   <script src="js/theme-init.js"></script>
 </head>
 <body data-page="home">
@@ -26,6 +27,7 @@
     <section class="hero" id="hero" aria-labelledby="hero-h1">
       <div class="hero-track">
         <div class="hero-stage">
+          <div class="dots" aria-hidden="true"><i class="moon" style="--c:var(--dot-cyan);--d:0.2"></i><i style="--x:4%;--y:52%;--s:190px;--c:var(--dot-coral);--d:0.9"></i><i style="--x:22%;--y:8%;--s:44px;--c:var(--dot-amber);--d:0.5"></i><i style="--x:38%;--y:6%;--s:28px;--c:var(--dot-cyan);--d:1.2"></i><i style="--x:35%;--y:88%;--s:64px;--c:var(--dot-white);--d:0.6"></i><i style="--x:63%;--y:8%;--s:56px;--c:var(--dot-amber);--d:1"></i><i style="--x:84%;--y:55%;--s:250px;--c:var(--dot-cyan);--d:0.4"></i><i style="--x:92%;--y:10%;--s:40px;--c:var(--dot-coral);--d:1.3"></i><i style="--x:9%;--y:30%;--s:20px;--c:var(--dot-white);--d:1.1"></i><i style="--x:90%;--y:74%;--s:26px;--c:var(--dot-amber);--d:0.8"></i><i style="--x:58%;--y:70%;--s:18px;--c:var(--dot-coral);--d:1.4"></i></div>
           <h1 class="hero-h1" id="hero-h1">
             <span class="hl hl-a"><span class="ln">Any page,</span></span>
             <span class="hl hl-b"><span class="ln">a clean table.</span></span>
@@ -103,10 +105,10 @@
     <section class="bands" id="features" aria-labelledby="features-h">
       <h2 class="sr-only" id="features-h">What Sieve does for you</h2>
 
-      <div class="band" data-on="true" style="--band:var(--field-3)" data-reveal>
+      <div class="band" data-on="false" style="--band:var(--field-3)" data-reveal>
         <div class="band-in">
           <p class="band-s" id="b1">It finds the table by itself</p>
-          <button class="sw" type="button" role="switch" aria-checked="true" aria-labelledby="b1" data-ui><span></span></button>
+          <button class="sw" type="button" role="switch" aria-checked="false" aria-labelledby="b1" data-ui><span></span></button>
           <p class="band-c"><b data-count="12">12</b> rows by 6 columns on the demo shop. Every table and repeated list is scored, and the biggest wins.</p>
         </div>
       </div>
@@ -117,10 +119,10 @@
           <p class="band-c"><b data-count="36">36</b> rows over 3 pages from one click, with your own delay between pages.</p>
         </div>
       </div>
-      <div class="band" data-on="true" style="--band:var(--field-2)" data-reveal>
+      <div class="band" data-on="false" style="--band:var(--field-2)" data-reveal>
         <div class="band-in">
           <p class="band-s" id="b3">It reads pages behind your login</p>
-          <button class="sw" type="button" role="switch" aria-checked="true" aria-labelledby="b3" data-ui><span></span></button>
+          <button class="sw" type="button" role="switch" aria-checked="false" aria-labelledby="b3" data-ui><span></span></button>
           <p class="band-c">The extension reads the tab you are looking at, as you see it. Nothing is uploaded to read it.</p>
         </div>
       </div>
@@ -141,7 +143,7 @@
     </section>
 
     <!-- How it works: one card, four fields -->
-    <section class="strip" id="how" aria-labelledby="how-h">
+    <section class="strip" id="how" data-motion="strip" aria-labelledby="how-h">
       <div class="field f1">
         <h2 id="how-h">Link to file</h2>
         <div class="rc" data-ui>
@@ -174,7 +176,7 @@
     </section>
 
     <!-- One row, three states -->
-    <section class="states g12 wrap" id="row" aria-labelledby="row-h">
+    <section class="states g12 wrap" id="row" data-motion="states" aria-labelledby="row-h">
       <h2 id="row-h">One row's journey</h2>
 
       <div class="st-line"><p class="st-word">Found</p>
@@ -188,7 +190,7 @@
     </section>
 
     <!-- Chrome extension -->
-    <section class="ext" id="extension" aria-labelledby="ext-h">
+    <section class="ext" id="extension" data-motion="ext" aria-labelledby="ext-h">
       <div class="ext-in g12 wrap">
         <div class="ext-copy">
           <h2 id="ext-h">Scrape pages behind your login</h2>
@@ -205,36 +207,36 @@
           </ol>
         </div>
         <figure class="ext-pic">
-          <img src="assets/sieve.jpg" width="1600" height="941" alt="An old woven palm-fibre sieve tray resting on a grey table" loading="lazy" decoding="async" id="ext-img">
+          <img src="assets/mesh-cyan.jpg" width="1000" height="1334" alt="Close-up of a cyan metal mesh with diamond-shaped holes against black" loading="lazy" decoding="async" id="ext-img">
         </figure>
       </div>
     </section>
 
     <!-- Proof: measured results on real sites -->
-    <section class="proof wrap" id="proof" aria-labelledby="proof-h">
+    <section class="proof wrap" id="proof" data-motion="proof" aria-labelledby="proof-h">
       <div class="tiles">
         <div class="tile tile-head"><h2 id="proof-h">Tested on real sites</h2><p>Results from live pages, found automatically.</p></div>
-        <div class="tile" data-reveal><b>Books to Scrape</b><span>20 books</span></div>
-        <div class="tile" data-reveal><b>Quotes to Scrape</b><span>30 quotes, 3 pages</span></div>
-        <div class="tile" data-reveal><b>Scrape This Site</b><span>250 countries</span></div>
-        <div class="tile" data-reveal><b>python.org</b><span>274 releases</span></div>
-        <div class="tile" data-reveal><b>Wikipedia</b><span>86 rows</span></div>
-        <figure class="tile tile-pic" data-reveal><img src="assets/sieve-2.jpg" width="1400" height="1289" alt="A round woven sieve seen from above, its reeds crossing in a fine mesh" loading="lazy" decoding="async"></figure>
+        <div class="tile" data-reveal><b>Books to Scrape</b><span><em class="n" data-count="20">20</em> books</span></div>
+        <div class="tile" data-reveal><b>Quotes to Scrape</b><span><em class="n" data-count="30">30</em> quotes, 3 pages</span></div>
+        <div class="tile" data-reveal><b>Scrape This Site</b><span><em class="n" data-count="250">250</em> countries</span></div>
+        <div class="tile" data-reveal><b>python.org</b><span><em class="n" data-count="274">274</em> releases</span></div>
+        <div class="tile" data-reveal><b>Wikipedia</b><span><em class="n" data-count="86">86</em> rows</span></div>
+        <figure class="tile tile-pic" data-reveal><img src="assets/lines-black.jpg" width="1000" height="1500" alt="White wireframe lines of a building against a black sky" loading="lazy" decoding="async"></figure>
       </div>
     </section>
 
     <!-- The name: a sieve keeps what you want -->
-    <section class="why g12 wrap" id="why" aria-labelledby="why-h">
+    <section class="why g12 wrap" id="why" data-motion="why" aria-labelledby="why-h">
       <div class="why-copy">
         <h2 id="why-h">Why it is called Sieve</h2>
         <p>A sieve keeps what you want and lets the rest fall through. We do that with web pages.</p>
-        <figure class="why-woman" data-reveal><img src="assets/peasant-woman-with-winnowing-basket.jpg" width="1000" height="1273" alt="Nineteenth-century photograph of a young woman tipping grain and chaff in a large woven winnowing basket" loading="lazy" decoding="async"></figure>
+        <figure class="why-woman" data-reveal><img src="assets/facade-cells.jpg" width="1000" height="1334" alt="Black and white facade made of a grid of square panels with rounded windows" loading="lazy" decoding="async"></figure>
       </div>
-      <figure class="why-gold" data-reveal><img src="assets/strainer.jpg" width="1400" height="1120" alt="An ancient gold strainer, its bowl pierced with hundreds of small holes" loading="lazy" decoding="async"></figure>
+      <figure class="why-gold" data-reveal><img src="assets/lattice-bw.jpg" width="1400" height="933" alt="Diamond lattice of a steel and glass roof in black and white" loading="lazy" decoding="async"></figure>
     </section>
 
     <!-- The sentence with a blank -->
-    <section class="cta wrap" id="start" aria-labelledby="cta-h">
+    <section class="cta wrap" id="start" data-motion="cta" aria-labelledby="cta-h">
       <form class="cta-form" id="cta-form" action="app.html" method="get" autocomplete="off">
         <h2 id="cta-h">Turn <input id="cta-url" name="url" type="text" inputmode="url" placeholder="a link" aria-label="Page link" spellcheck="false"><input type="hidden" name="autorun" value="1"> into a <button type="submit">table</button></h2>
         <p>Opens the scraper and runs it on that page. Nothing is stored. Only scrape pages you are allowed to.</p>
@@ -244,9 +246,10 @@
   </main>
 
   <div id="site-footer"></div>
-  <p class="foot-credit">Pictures, all public domain (CC0) from The Metropolitan Museum of Art: <a href="https://www.metmuseum.org/art/collection/search/474934">Sieve tray</a> and <a href="https://www.metmuseum.org/art/collection/search/474935">round sieve</a> (palm leaf and fiber, 580&ndash;640, Coptic); <a href="https://www.metmuseum.org/art/collection/search/545169">Strainer</a> (gold, ca. 1290&ndash;1224 BCE); <a href="https://www.metmuseum.org/art/collection/search/288842">Peasant woman with winnowing basket</a> (late 1870s).</p>
+  <p class="foot-credit">Photographs from Pexels, free to use: <a href="https://www.pexels.com/photo/background-of-metal-net-fence-5800558/">cyan metal mesh</a>, <a href="https://www.pexels.com/photo/black-abstract-wallpaper-3137079/">wireframe building</a>, <a href="https://www.pexels.com/photo/abstract-geometric-architecture-pattern-29253548/">steel lattice roof</a>, <a href="https://www.pexels.com/photo/modern-minimalist-architecture-with-geometric-windows-31656454/">grid facade</a>.</p>
 
   <script src="js/main.js"></script>
   <script src="js/home.js"></script>
+  <script src="js/motion.js"></script>
 </body>
 </html>

@@ -1,8 +1,8 @@
-/* Applies the saved theme before first paint and marks the page as script-enabled (external file so extension
-   pages, which forbid inline scripts, work too). */
+/* Applies the saved theme before first paint (dark by default) and marks the page as script-enabled.
+   External file so extension pages, which forbid inline scripts, work too. */
 try {
   var t = localStorage.getItem('sieve.theme');
-  t = t ? JSON.parse(t) : (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  t = t ? JSON.parse(t) : 'dark';
   document.documentElement.setAttribute('data-theme', t);
-} catch (e) { /* storage blocked: stay on the default theme */ }
+} catch (e) { document.documentElement.setAttribute('data-theme', 'dark'); }
 document.documentElement.classList.add('js');

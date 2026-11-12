@@ -361,7 +361,7 @@
   };
 
   /* ------------------------------------------------------------ site chrome */
-  var LOGO = '<svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#0D7480"/>' +
+  var LOGO = '<svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#32BFDA"/><path d="M7.5 8.5h17l-6.4 7.4V22l-4.2 2v-8.1z" fill="none" stroke="#0A0A0A" stroke-width="2.2" stroke-linejoin="round"/><circle cx="9.2" cy="24.2" r="2.1" fill="#FF5E57"/><circle cx="23.4" cy="24.4" r="2.1" fill="#FCC55F"/></svg>';
     '<path d="M8 9h16l-6 7.2V23l-4 2v-8.8z" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>' +
     '<circle cx="23.5" cy="23.5" r="2.2" fill="#00C48C"/></svg>';
   Sieve.logoSvg = LOGO;

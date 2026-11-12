@@ -1,0 +1,136 @@
+/* ==========================================================================
+   Scroll motion, one idea per section.
+   Scrubbed motion (position is the clock) uses CSS scroll-driven animations:
+   animation-timeline: view(), linear, no duration. Triggered motion (words, colour
+   floods, counters) is started once by js/motion.js. Everything is transform,
+   opacity or clip-path. Nothing stays hidden without script, and reduced motion
+   shows the finished page.
+   ========================================================================== */
+
+:root { --dot-coral: var(--coral); --dot-amber: var(--amber); --dot-cyan: var(--cyan); }
+
+/* ------------------------------------------------------------------ hero */
+.dots { position: absolute; inset: 0; z-index: 0; overflow: hidden; }   /* beneath every control, so it can be hit-tested without blocking anything */
+.dots .moon { left: 50%; top: 50%; width: min(78vh, 50vw); height: min(78vh, 50vw); margin: calc(min(78vh, 50vw) / -2) 0 0 calc(min(78vh, 50vw) / -2); animation: none; translate: 0 calc(var(--hp, 0) * -60px); }
+.dots i {
+  position: absolute; left: var(--x); top: var(--y); width: var(--s); height: var(--s); border-radius: 50%;
+  background: var(--c);
+  translate: 0 calc(var(--hp, 0) * var(--d) * -220px);
+  animation: dot-float calc(5s + var(--d) * 2.2s) ease-in-out infinite alternate;
+  will-change: translate;
+}
+@keyframes dot-float { from { transform: translate3d(0, -12px, 0) scale(1); } to { transform: translate3d(0, 16px, 0) scale(1.06); } }
+.hl-a { translate: calc(var(--hp, 0) * -4vw) 0; }
+.hl-b { translate: calc(var(--hp, 0) * 4vw) 0; }
+.frame { transform: scale(.955); transition: opacity 400ms var(--ease), transform 600ms var(--ease-spring); }
+.frame.is-active { transform: scale(1); }
+
+/* ----------------------------------------------------------- words (all) */
+.js .w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .14em; margin-bottom: -.14em; }
+.js .w > i { display: inline-block; font-style: normal; transform: translateY(112%); transition: transform 850ms var(--ease); transition-delay: calc(var(--wi, 0) * 55ms); }
+.js [data-words].in .w > i { transform: none; }
+.js .cta-form h2 .w { overflow: visible; }
+.js .cta-form h2 .w > i { transform: translateY(.35em); opacity: 0; transition: transform 800ms var(--ease), opacity 600ms var(--ease); transition-delay: calc(var(--wi, 0) * 70ms); }
+.js .cta-form h2[data-words].in .w > i { opacity: 1; transform: none; }
+
+/* ------------------------------------------------- bands: a colour flood */
+.band, .band[data-on] { position: relative; isolation: isolate; background: transparent; }
+/* the band's own colour and ink switch together once the flood has covered it */
+.band[data-ink="on"] { background: var(--band); }
+.band::before {
+  content: ''; position: absolute; inset: 0; z-index: -1; background: var(--band);
+  clip-path: circle(0% at calc(100% - var(--margin) - 1.1em) 50%);
+  transition: clip-path 900ms var(--ease);
+}
+.band[data-on="true"]::before { clip-path: circle(150% at calc(100% - var(--margin) - 1.1em) 50%); }
+.band-s, .band-c { transition: max-height 500ms var(--ease), opacity 400ms var(--ease), margin 400ms var(--ease); }   /* ink and ground swap together, after the flood */
+
+/* -------------------------------------------- scrubbed, where supported */
+@supports (animation-timeline: view()) {
+  /* four fields rise into place, their cards a beat later, the clauses slide in */
+  .field { animation: field-in linear both; animation-timeline: view(); animation-range: entry 0% entry 95%; }
+  @keyframes field-in { from { transform: translateY(14vh) scale(.94); opacity: .25; } to { transform: none; opacity: 1; } }
+  .field .rc { margin-left: -130px; left: 50%; translate: 0 0; animation: card-in linear both; animation-timeline: view(); animation-range: entry 10% cover 46%; }
+  @keyframes card-in { from { translate: 0 110px; rotate: -4deg; scale: .9; } to { translate: 0 0; rotate: 0deg; scale: 1; } }
+  .field .clause { animation: clause-in linear both; animation-timeline: view(); animation-range: entry 25% cover 50%; }
+  @keyframes clause-in { from { transform: translateY(18px); opacity: .1; } to { transform: none; opacity: 1; } }
+
+  /* the row's three states come in from alternating sides */
+  .states .st-line:nth-of-type(odd) .row-ui { animation: row-l linear both; animation-timeline: view(); animation-range: entry 0% cover 38%; }
+  .states .st-line:nth-of-type(even) .row-ui { animation: row-r linear both; animation-timeline: view(); animation-range: entry 0% cover 38%; }
+  @keyframes row-l { from { transform: translateX(-90px); opacity: .2; } to { transform: none; opacity: 1; } }
+  @keyframes row-r { from { transform: translateX(90px); opacity: .2; } to { transform: none; opacity: 1; } }
+  .states .st-word { animation: word-in linear both; animation-timeline: view(); animation-range: entry 10% cover 34%; }
+  @keyframes word-in { from { transform: translateX(-24px); opacity: 0; } to { transform: none; opacity: 1; } }
+
+  /* extension: the mesh photograph is wiped in and drifts */
+  .ext-pic { animation: wipe-left linear both; animation-timeline: view(); animation-range: entry 0% cover 40%; }
+  @keyframes wipe-left { from { clip-path: inset(0 0 0 100%); } to { clip-path: inset(0 0 0 0); } }
+  .ext-pic img { animation: drift linear both; animation-timeline: view(); animation-range: entry 0% exit 100%; }
+  @keyframes drift { from { transform: translateY(-34px) scale(1.32); } to { transform: translateY(34px) scale(1.12); } }
+
+  /* proof tiles pop in as a wave across the board */
+  .tile { animation: tile-in linear both; animation-timeline: view(); animation-range: entry calc(var(--ti, 0) * 5%) entry calc(70% + var(--ti, 0) * 5%); }
+  @keyframes tile-in { from { transform: translateY(70px) scale(.86); opacity: .15; } to { transform: none; opacity: 1; } }
+  .tile-pic img { animation: drift-s linear both; animation-timeline: view(); animation-range: entry 0% exit 100%; }
+  @keyframes drift-s { from { transform: scale(1.25) translateY(-18px); } to { transform: scale(1.05) translateY(18px); } }
+
+  /* why: two photographs reveal and move against each other */
+  .why-woman { animation: rise-wipe linear both, par-up linear both; animation-timeline: view(), view(); animation-range: entry 0% entry 80%, entry 0% exit 100%; }
+  .why-gold { animation: rise-wipe linear both, par-down linear both; animation-timeline: view(), view(); animation-range: entry 0% entry 80%, entry 0% exit 100%; }
+  @keyframes rise-wipe { from { clip-path: inset(100% 0 0 0); } to { clip-path: inset(0 0 0 0); } }
+  @keyframes par-up { from { translate: 0 60px; } to { translate: 0 -40px; } }
+  @keyframes par-down { from { translate: 0 -30px; } to { translate: 0 50px; } }
+  .why-woman img, .why-gold img { animation: drift-s linear both; animation-timeline: view(); animation-range: entry 0% exit 100%; }
+
+  /* the blank in the closing sentence opens like a shutter */
+  .cta-form h2 input { animation: shutter linear both; animation-timeline: view(); animation-range: entry 30% cover 45%; }
+  @keyframes shutter { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+}
+
+/* ------------------------------------------------------ triggered extras */
+.js .ext-steps li { opacity: 0; transform: translateX(-18px); transition: opacity 600ms var(--ease), transform 700ms var(--ease); transition-delay: calc(var(--li, 0) * 110ms); }
+.js .ext.in .ext-steps li { opacity: 1; transform: none; }
+.cta-form h2 button { position: relative; }
+.cta.in .cta-form h2 button::after {
+  content: ''; position: absolute; inset: 0; border-radius: inherit; border: 3px solid var(--primary);
+  animation: ring 2.4s var(--ease) infinite; pointer-events: none;
+}
+@keyframes ring { 0% { transform: scale(1); opacity: .7; } 70%, 100% { transform: scale(1.55, 1.9); opacity: 0; } }
+.tile em.n { display: inline-block; min-width: 1ch; }
+
+/* no scroll timelines: fall back to a single fade-up per block */
+@supports not (animation-timeline: view()) {
+  .field, .tile, .row-ui, .ext-pic, .why-woman, .why-gold { opacity: .28; transform: translateY(24px); transition: opacity 700ms var(--ease), transform 800ms var(--ease); }
+  .field.in, .tile.in, .row-ui.in, .ext-pic.in, .why-woman.in, .why-gold.in { opacity: 1; transform: none; }
+}
+
+/* ------------------------------------------------------ reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .dots i { animation: none !important; translate: none !important; }
+  .hl-a, .hl-b { translate: none !important; }
+  .frame { transform: none !important; }
+  .js .w > i, .js .cta-form h2 .w > i { transform: none !important; opacity: 1 !important; transition: none !important; }
+  .band::before { transition: none !important; }
+  .field, .field .rc, .field .clause, .row-ui, .st-word, .ext-pic, .ext-pic img, .tile, .tile-pic img, .why-woman, .why-gold, .why-woman img, .why-gold img, .cta-form h2 input, .js .ext-steps li {
+    animation: none !important; transform: none !important; opacity: 1 !important; clip-path: none !important; translate: none !important; rotate: none !important; scale: none !important; transition: none !important;
+  }
+  .cta.in .cta-form h2 button::after { animation: none !important; display: none; }
+}
+
+/* the band's colour change is a swap, never a fade (the flood is the animation) */
+.band, .band[data-on], .band[data-ink] { transition: none; }
+
+/* on phones the stage flows as a column, so the dots would sit behind the text: leave them out */
+@media (max-width: 899px) { .dots { display: none; } }
+
+/* statements take the band's ink (a bare <p> would otherwise keep the page's grey) */
+.band-s { color: inherit; }
+.band[data-ink="off"] .band-s, .band:not([data-ink]) .band-s { color: var(--text); }
+
+/* phones: shorter travel so nothing slides past the screen edge */
+@media (max-width: 899px) {
+  @keyframes row-l { from { transform: translateX(-28px); opacity: .2; } to { transform: none; opacity: 1; } }
+  @keyframes row-r { from { transform: translateX(28px); opacity: .2; } to { transform: none; opacity: 1; } }
+  @keyframes word-in { from { transform: translateY(10px); opacity: 0; } to { transform: none; opacity: 1; } }
+}

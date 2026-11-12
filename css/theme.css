@@ -1,47 +1,55 @@
 /* ==========================================================================
-   Sieve theme: "Frost & slate"
-   Loaded after base / components / pages on every page. It replaces the tokens
-   (colour, type, radius), then removes ornament: gradients, resting shadows,
-   uppercase labels, monospace data, glass. Teal is the single accent.
+   Sieve theme: black ground, four signal colours.
+   Coral, amber, cyan and white (with amber and cyan tints) come from the brand
+   picture. Dark is the default and is true black; light keeps the same hues,
+   deepened where text sits on them. No gradients, no resting shadows.
    ========================================================================== */
 
 :root {
-  --bg: #f7f9fa;
-  --surface: #ecf0f2;
+  /* the signal colours */
+  --coral: #ff5e57;
+  --amber: #fcc55f;  --amber-2: #ddae50;  --amber-3: #bc9441;
+  --cyan: #32bfda;   --cyan-2: #78d3e6;   --cyan-3: #a5dce8;   --cyan-4: #d0ebf0;
+
+  /* light theme */
+  --bg: #fbfbfa;
+  --surface: #f1f1ee;
   --elevated: #ffffff;
-  --hover: rgba(31, 48, 56, .06);
-  --border: #d9e1e5;
-  --border-strong: #c3cfd5;
+  --hover: rgba(10, 10, 10, .06);
+  --border: #e1e1dc;
+  --border-strong: #c8c8c2;
 
-  --text: #1f3038;
-  --text-2: #324650;
-  --muted: #5d6b72;
-  --subtle: #7b8a91;
+  --text: #0a0a0a;
+  --text-2: #2b2b29;
+  --muted: #595955;
+  --subtle: #7a7a75;
 
-  --primary: #0d7480;
-  --primary-hover: #0a626c;
-  --primary-press: #08535b;
-  --primary-soft: rgba(13, 116, 128, .10);
-  --primary-ring: rgba(13, 116, 128, .38);
+  --primary: #087b92;
+  --primary-hover: #066a7e;
+  --primary-press: #055a6b;
+  --primary-soft: rgba(8, 123, 146, .10);
+  --primary-ring: rgba(8, 123, 146, .42);
   --on-primary: #ffffff;
-  --success: #1b8a5a;
-  --success-soft: rgba(27, 138, 90, .12);
-  --warning: #b86e00;
-  --warning-soft: rgba(184, 110, 0, .12);
-  --danger: #c2413a;
-  --danger-soft: rgba(194, 65, 58, .10);
+  --success: #087b92;
+  --success-soft: rgba(8, 123, 146, .12);
+  --warning: #9a6a00;
+  --warning-soft: rgba(154, 106, 0, .12);
+  --danger: #d6382f;
+  --danger-soft: rgba(214, 56, 47, .10);
 
-  /* Flat colour fields: whole bands of the page change colour, nothing fades */
-  --field-1: #d8e8ec;
-  --field-2: #dfe9e0;
-  --field-3: #dae3ee;
-  --field-4: #e9e7df;
+  /* whole fields of colour: pastel tints of the four hues in light */
+  --field-1: #ffd6d3;   /* coral tint */
+  --field-2: #ffe9b8;   /* amber tint */
+  --field-3: #c9eef6;   /* cyan tint */
+  --field-4: #e8e8e4;   /* white tint */
+  --on-field: #0a0a0a;
+  --dot-white: var(--amber-3);
 
   --shadow-xs: none;
   --shadow-sm: none;
   --shadow-md: none;
-  --shadow-lg: 0 20px 44px -20px rgba(31, 48, 56, .45);   /* only things that truly float: menus, dialogs */
-  --overlay: rgba(15, 26, 31, .45);
+  --shadow-lg: 0 20px 44px -20px rgba(10, 10, 10, .45);   /* only things that truly float: menus, dialogs */
+  --overlay: rgba(5, 5, 5, .5);
 
   --radius-card: 6px;
   --radius-btn: 6px;
@@ -50,7 +58,7 @@
 
   --font-sans: 'Switzer', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   --font-display: 'Switzer', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-mono: 'Switzer', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif; /* taste-skill-ignore */
+  --font-mono: 'Switzer', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif; /* taste-skill-ignore: maps "mono" to Switzer, no monospace face is used */
 
   --ease: cubic-bezier(.22, 1, .36, 1);
   --ease-spring: cubic-bezier(.34, 1.4, .5, 1);
@@ -61,35 +69,40 @@
 }
 
 [data-theme="dark"] {
-  --bg: #0f1a1f;
-  --surface: #15242a;
-  --elevated: #1a2b32;
-  --hover: rgba(231, 239, 242, .07);
-  --border: #26383f;
-  --border-strong: #33494f;
+  --bg: #050505;
+  --surface: #0f0f0f;
+  --elevated: #161616;
+  --hover: rgba(255, 255, 255, .07);
+  --border: #262626;
+  --border-strong: #3d3d3d;
 
-  --text: #e7eff2;
-  --text-2: #c5d3d8;
-  --muted: #93a6ae;
-  --subtle: #70838b;
+  --text: #f7f7f5;
+  --text-2: #d8d8d4;
+  --muted: #a8a8a3;
+  --subtle: #8a8a86;
 
-  --primary: #4fc3cf;
-  --primary-hover: #6bd0da;
-  --primary-press: #86dbe3;
-  --primary-soft: rgba(79, 195, 207, .14);
-  --primary-ring: rgba(79, 195, 207, .42);
-  --on-primary: #04262b;
-  --success: #4cc38a;
-  --success-soft: rgba(76, 195, 138, .16);
-  --warning: #e0a43a;
-  --danger: #ef6a62;
+  --primary: #32bfda;
+  --primary-hover: #5acde3;
+  --primary-press: #78d3e6;
+  --primary-soft: rgba(50, 191, 218, .14);
+  --primary-ring: rgba(50, 191, 218, .46);
+  --on-primary: #031d24;
+  --success: #78d3e6;
+  --success-soft: rgba(120, 211, 230, .15);
+  --warning: #fcc55f;
+  --warning-soft: rgba(252, 197, 95, .15);
+  --danger: #ff5e57;
+  --danger-soft: rgba(255, 94, 87, .14);
 
-  --field-1: #16313a;
-  --field-2: #1b2f27;
-  --field-3: #1a2a3b;
-  --field-4: #2a2a23;
-  --shadow-lg: 0 20px 44px -20px rgba(0, 0, 0, .7);
-  --overlay: rgba(0, 0, 0, .6);
+  /* saturated fields, exactly the four circles of the brand picture */
+  --field-1: #ff5e57;
+  --field-2: #fcc55f;
+  --field-3: #32bfda;
+  --field-4: #ffffff;
+  --on-field: #0a0a0a;
+  --dot-white: #ffffff;
+  --shadow-lg: 0 20px 44px -20px rgba(0, 0, 0, .85);
+  --overlay: rgba(0, 0, 0, .66);
 }
 
 /* ------------------------------------------------------------------ type */
@@ -168,4 +181,4 @@ main p, main li { max-width: 70ch; }
 .shot-body { background: var(--elevated); }
 .status-pill, .chip { border-radius: var(--radius-chip); }
 h1 { letter-spacing: -0.04em; }
-.page-head h1, .docs-hero h1, main > section:first-child h1 { font-size: clamp(36px, 4.4vw, 64px); line-height: 1.02; }
+body:not([data-page="home"]) .page-head h1, body:not([data-page="home"]) .docs-hero h1, body:not([data-page="home"]) main > section:first-child h1 { font-size: clamp(36px, 4.4vw, 64px); line-height: 1.02; }
