@@ -1,0 +1,304 @@
+{
+  "name": "Fernwood Supply — product catalogue",
+  "source_url": "demo://shop",
+  "per_page": 12,
+  "pages": 3,
+  "headers": [
+    "SKU",
+    "Product",
+    "Category",
+    "Price",
+    "Rating",
+    "Availability"
+  ],
+  "rows": [
+    [
+      "FW-1001",
+      "Aero Desk Lamp",
+      "Lighting",
+      "$39.00",
+      "4.6",
+      "In stock"
+    ],
+    [
+      "FW-1002",
+      "Birch Monitor Riser",
+      "Desk",
+      "$54.50",
+      "4.4",
+      "In stock"
+    ],
+    [
+      "FW-1003",
+      "Cedar Cable Tray",
+      "Organization",
+      "$18.90",
+      "4.2",
+      "In stock"
+    ],
+    [
+      "FW-1004",
+      "Dune Ergonomic Mouse",
+      "Peripherals",
+      "$47.00",
+      "4.7",
+      "Low stock"
+    ],
+    [
+      "FW-1005",
+      "Ember Task Light",
+      "Lighting",
+      "$62.00",
+      "4.5",
+      "In stock"
+    ],
+    [
+      "FW-1006",
+      "Fjord Standing Mat",
+      "Wellness",
+      "$71.25",
+      "4.3",
+      "In stock"
+    ],
+    [
+      "FW-1007",
+      "Grove Desk Plant Pot",
+      "Decor",
+      "$22.00",
+      "4.1",
+      "In stock"
+    ],
+    [
+      "FW-1008",
+      "Harbor Laptop Stand",
+      "Desk",
+      "$58.00",
+      "4.8",
+      "In stock"
+    ],
+    [
+      "FW-1009",
+      "Iris Webcam Cover Set",
+      "Peripherals",
+      "$9.50",
+      "4.0",
+      "In stock"
+    ],
+    [
+      "FW-1010",
+      "Juniper Notebook A5",
+      "Stationery",
+      "$12.75",
+      "4.6",
+      "In stock"
+    ],
+    [
+      "FW-1011",
+      "Kelp Wool Desk Pad",
+      "Desk",
+      "$44.00",
+      "4.9",
+      "Backorder"
+    ],
+    [
+      "FW-1012",
+      "Lumen Floor Lamp",
+      "Lighting",
+      "$129.00",
+      "4.5",
+      "In stock"
+    ],
+    [
+      "FW-1013",
+      "Maple Pen Cup",
+      "Organization",
+      "$16.00",
+      "4.2",
+      "In stock"
+    ],
+    [
+      "FW-1014",
+      "Nimbus Wrist Rest",
+      "Wellness",
+      "$26.40",
+      "4.4",
+      "In stock"
+    ],
+    [
+      "FW-1015",
+      "Onyx Mechanical Keyboard",
+      "Peripherals",
+      "$149.00",
+      "4.8",
+      "Low stock"
+    ],
+    [
+      "FW-1016",
+      "Pebble Cable Clips",
+      "Organization",
+      "$7.80",
+      "4.0",
+      "In stock"
+    ],
+    [
+      "FW-1017",
+      "Quartz Desk Clock",
+      "Decor",
+      "$34.00",
+      "4.3",
+      "In stock"
+    ],
+    [
+      "FW-1018",
+      "Reed Headphone Hook",
+      "Desk",
+      "$19.50",
+      "4.6",
+      "In stock"
+    ],
+    [
+      "FW-1019",
+      "Sage Monitor Light Bar",
+      "Lighting",
+      "$79.00",
+      "4.7",
+      "In stock"
+    ],
+    [
+      "FW-1020",
+      "Tundra Foot Rest",
+      "Wellness",
+      "$52.00",
+      "4.2",
+      "Backorder"
+    ],
+    [
+      "FW-1021",
+      "Umber Leather Mousepad",
+      "Desk",
+      "$38.00",
+      "4.5",
+      "In stock"
+    ],
+    [
+      "FW-1022",
+      "Vale Whiteboard Tile",
+      "Stationery",
+      "$29.90",
+      "4.1",
+      "In stock"
+    ],
+    [
+      "FW-1023",
+      "Willow Desk Organizer",
+      "Organization",
+      "$33.00",
+      "4.6",
+      "In stock"
+    ],
+    [
+      "FW-1024",
+      "Xenon USB-C Hub",
+      "Peripherals",
+      "$64.00",
+      "4.7",
+      "In stock"
+    ],
+    [
+      "FW-1025",
+      "Yarrow Sticky Note Set",
+      "Stationery",
+      "$8.40",
+      "4.0",
+      "In stock"
+    ],
+    [
+      "FW-1026",
+      "Zephyr Desk Fan",
+      "Wellness",
+      "$36.50",
+      "4.3",
+      "Low stock"
+    ],
+    [
+      "FW-1027",
+      "Alder Bookends",
+      "Decor",
+      "$27.00",
+      "4.4",
+      "In stock"
+    ],
+    [
+      "FW-1028",
+      "Basalt Phone Dock",
+      "Desk",
+      "$31.00",
+      "4.5",
+      "In stock"
+    ],
+    [
+      "FW-1029",
+      "Coral Highlighter Pack",
+      "Stationery",
+      "$6.90",
+      "3.9",
+      "In stock"
+    ],
+    [
+      "FW-1030",
+      "Delta Surge Strip",
+      "Peripherals",
+      "$41.00",
+      "4.6",
+      "In stock"
+    ],
+    [
+      "FW-1031",
+      "Elm Document Tray",
+      "Organization",
+      "$24.50",
+      "4.2",
+      "In stock"
+    ],
+    [
+      "FW-1032",
+      "Flint Desk Lamp Mini",
+      "Lighting",
+      "$28.00",
+      "4.1",
+      "In stock"
+    ],
+    [
+      "FW-1033",
+      "Glacier Water Bottle",
+      "Wellness",
+      "$21.00",
+      "4.8",
+      "In stock"
+    ],
+    [
+      "FW-1034",
+      "Hazel Cork Coasters",
+      "Decor",
+      "$14.20",
+      "4.3",
+      "In stock"
+    ],
+    [
+      "FW-1035",
+      "Indigo Fountain Pen",
+      "Stationery",
+      "$45.00",
+      "4.9",
+      "Low stock"
+    ],
+    [
+      "FW-1036",
+      "Jade Desk Succulent Kit",
+      "Decor",
+      "$19.00",
+      "4.2",
+      "In stock"
+    ]
+  ]
+}

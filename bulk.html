@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bulk Scrape — Sieve</title>
+  <meta name="description" content="Scrape up to 500 URLs at once into a single combined table with per-URL status and one-click CSV/XLSX export.">
+  <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+  <script>try{var t=localStorage.getItem('sieve.theme');t=t?JSON.parse(t):(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body data-page="bulk">
+  <div id="site-nav"></div>
+  <main class="container">
+    <div class="page-head" style="padding-bottom:var(--s-3)">
+      <span class="eyebrow">Bulk Scrape</span>
+      <h1>Scrape hundreds of URLs at once</h1>
+      <p class="lead">Paste up to 500 URLs, pick a scraper, and get one combined table with a <code>source_url</code> column.</p>
+      <div class="banner banner-warning" style="margin-top:var(--s-2);max-width:720px"><span data-icon="alert" data-size="16"></span><div><strong>Only scrape sites you have permission to scrape.</strong> Respect robots.txt and each site's Terms of Service.</div></div>
+    </div>
+
+    <div class="bulk-layout">
+      <div class="stack" style="margin-top:0">
+        <section class="card">
+          <div class="card-head"><h3>1 · URLs</h3><span class="badge" id="count">0 URLs</span><span class="spacer"></span><button class="btn btn-ghost btn-xs" type="button" id="sample">Load sample</button></div>
+          <div class="bulk-box">
+            <textarea class="textarea mono" id="input" placeholder="https://example.com/page-1&#10;https://example.com/page-2" spellcheck="false" aria-label="URLs, one per line"></textarea>
+            <div class="field"><label for="mode">Scraper</label><select class="select" id="mode"></select></div>
+            <div class="grid grid-2" style="gap:12px">
+              <div class="field"><label for="conc">Concurrency</label><input class="input input-sm" id="conc" type="number" min="1" max="8" value="3"></div>
+              <div class="field"><label for="delay">Delay (ms)</label><input class="input input-sm" id="delay" type="number" min="0" step="100" value="500"></div>
+              <div class="field"><label for="maxp">Max pages / URL</label><input class="input input-sm" id="maxp" type="number" min="1" max="50" value="1"></div>
+              <div class="field"><label for="wait">Max wait (ms)</label><input class="input input-sm" id="wait" type="number" min="1000" step="1000" value="15000"></div>
+            </div>
+            <label class="switch"><span>Follow pagination (when Max pages &gt; 1)</span><input type="checkbox" id="follow"><span class="track"></span></label>
+            <label class="switch"><span>Deduplicate rows</span><input type="checkbox" id="dedupe"><span class="track"></span></label>
+            <div class="row">
+              <button class="btn btn-primary" type="button" id="run"><span data-icon="layers" data-size="16"></span>Scrape All</button>
+              <button class="btn btn-danger-ghost" type="button" id="stop" hidden><span data-icon="square" data-size="16"></span>Stop</button>
+              <span class="status-pill" id="pill" data-status="idle"><span class="dot"></span><span>Idle</span></span>
+            </div>
+            <div class="progress" id="progress" hidden><span></span></div>
+          </div>
+        </section>
+        <section class="card" id="url-card" hidden>
+          <div class="card-head"><h3>Per-URL status</h3><span class="spacer"></span><button class="btn btn-ghost btn-xs" type="button" id="retry" hidden><span data-icon="refresh" data-size="14"></span>Retry failed</button></div>
+          <div class="url-table-wrap"><table class="url-table"><tbody id="url-rows"></tbody></table></div>
+        </section>
+      </div>
+
+      <section class="card" aria-label="Combined results">
+        <div class="card-head">
+          <h3>2 · Combined results</h3><span class="badge" id="rcount">0 rows</span><span class="spacer"></span>
+          <button class="btn btn-sm" type="button" id="exp-csv" disabled><span data-icon="download" data-size="16"></span>CSV</button>
+          <button class="btn btn-sm" type="button" id="exp-xlsx" disabled><span data-icon="sheet" data-size="16"></span>XLSX</button>
+          <button class="btn btn-sm hide-mobile" type="button" id="exp-copy" disabled><span data-icon="copy" data-size="16"></span>Copy</button>
+        </div>
+        <div class="sum-grid" id="summary" hidden>
+          <div class="stat"><b id="s-done">0</b><span>Done</span></div>
+          <div class="stat"><b id="s-err">0</b><span>Failed</span></div>
+          <div class="stat"><b id="s-rows">0</b><span>Rows</span></div>
+          <div class="stat"><b id="s-time">0 s</b><span>Elapsed</span></div>
+        </div>
+        <div class="filter-chips" id="chips" hidden></div>
+        <div id="empty"><div class="empty"><span class="icon-tile" data-icon="layers" data-size="22"></span><h3>Results appear here</h3><p>Every row gets a <code>source_url</code> column so you always know where it came from. Rename or hide columns in the table header.</p></div></div>
+        <div id="table-host" hidden></div>
+      </section>
+    </div>
+  </main>
+  <div id="site-footer"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" defer></script>
+  <script src="js/main.js"></script>
+  <script src="js/demo.js"></script>
+  <script src="js/extractors.js"></script>
+  <script src="js/scraper.js"></script>
+  <script src="js/export.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/bulk.js"></script>
+</body>
+</html>

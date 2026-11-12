@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Built-in Scrapers — Sieve</title>
+  <meta name="description" content="Email, phone, business, people, social, B2B, review and page-text scrapers — one click each.">
+  <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+  <script>try{var t=localStorage.getItem('sieve.theme');t=t?JSON.parse(t):(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body data-page="scrapers">
+  <div id="site-nav"></div>
+  <main class="container">
+    <div class="page-head">
+      <span class="eyebrow">Built-in scrapers</span>
+      <h1>Eight scrapers, zero setup</h1>
+      <p class="lead">Each one preloads the scraper app with the right extractor. Need a table or a list of images instead? Those are in the app too.</p>
+    </div>
+    <div class="grid grid-4" style="padding-bottom:var(--s-12)">
+      <article class="card card-hover catalog-card"><span class="icon-tile" data-icon="mail" data-size="20"></span><h3>Email</h3><p>Every address from visible text, mailto links, "name [at] site [dot] com" and obfuscated markup.</p><div class="extracts"><span class="chip">email</span><span class="chip">domain</span></div><div class="foot"><span class="text-xs muted">Regex + mailto</span><a class="btn btn-sm btn-primary" href="app.html?preset=email">Launch</a></div></article>
+      <article class="card card-hover catalog-card"><span class="icon-tile success" data-icon="phone" data-size="20"></span><h3>Phone</h3><p>Phone numbers from text and tel: links, filtered to drop dates, IPs and IDs.</p><div class="extracts"><span class="chip">phone</span><span class="chip">normalized</span></div><div class="foot"><span class="text-xs muted">Regex + tel</span><a class="btn btn-sm btn-primary" href="app.html?preset=phone">Launch</a></div></article>
+      <article class="card card-hover catalog-card"><span class="icon-tile warning" data-icon="building" data-size="20"></span><h3>Business</h3><p>Company name, industry, address, phone and website from JSON-LD, microdata and page structure.</p><div class="extracts"><span class="chip">company</span><span class="chip">address</span><span class="chip">industry</span></div><div class="foot"><span class="text-xs muted">Structured + heuristic</span><a class="btn btn-sm btn-primary" href="app.html?preset=business">Launch</a></div></article>
+      <article class="card card-hover catalog-card"><span class="icon-tile" data-icon="user" data-size="20"></span><h3>People</h3><p>Name, job title, email, phone, location and profile links from team and staff cards.</p><div class="extracts"><span class="chip">name</span><span class="chip">title</span><span class="chip">email</span></div><div class="foot"><span class="text-xs muted">Card detection</span><a class="btn btn-sm btn-primary" href="app.html?preset=people">Launch</a></div></article>
+      <article class="card card-hover catalog-card"><span class="icon-tile success" data-icon="globe" data-size="20"></span><h3>Social</h3><p>Facebook, X/Twitter, Instagram, LinkedIn, YouTube and TikTok profiles — share buttons excluded.</p><div class="extracts"><span class="chip">platform</span><span class="chip">handle</span></div><div class="foot"><span class="text-xs muted">Link + sameAs</span><a class="btn btn-sm btn-primary" href="app.html?preset=social">Launch</a></div></article>
+      <article class="card card-hover catalog-card"><span class="icon-tile warning" data-icon="briefcase" data-size="20"></span><h3>B2B</h3><p>Lead rows combining company, size, revenue, founding year and each contact person.</p><div class="extracts"><span class="chip">company</span><span class="chip">employees</span><span class="chip">contact</span></div><div class="foot"><span class="text-xs muted">Business + People</span><a class="btn btn-sm btn-primary" href="app.html?preset=b2b">Launch</a></div></article>
+      <article class="card card-hover catalog-card"><span class="icon-tile" data-icon="star" data-size="20"></span><h3>Review</h3><p>Author, star rating, date and text from schema.org reviews, JSON-LD and review-like blocks.</p><div class="extracts"><span class="chip">author</span><span class="chip">rating</span><span class="chip">review</span></div><div class="foot"><span class="text-xs muted">Microdata + stars</span><a class="btn btn-sm btn-primary" href="app.html?preset=review">Launch</a></div></article>
+      <article class="card card-hover catalog-card"><span class="icon-tile neutral" data-icon="file-text" data-size="20"></span><h3>Page Text</h3><p>Clean, readable text with scripts, navigation and footers stripped, split by heading.</p><div class="extracts"><span class="chip">section</span><span class="chip">text</span></div><div class="foot"><span class="text-xs muted">Readability-style</span><a class="btn btn-sm btn-primary" href="app.html?preset=text">Launch</a></div></article>
+    </div>
+  </main>
+  <div id="site-footer"></div>
+  <script src="js/main.js"></script>
+</body>
+</html>

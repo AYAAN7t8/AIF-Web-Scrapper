@@ -1,0 +1,17 @@
+{
+  "name": "aif-web-scrapper",
+  "version": "1.0.0",
+  "description": "Sieve: a browser-based web scraper (table detection, pagination, 10 extractors, bulk, CSV/XLSX/Sheets export) with a built-in zero-dependency scraping proxy.",
+  "private": true,
+  "license": "MIT",
+  "main": "serve.js",
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "start": "node serve.js",
+    "serve": "node serve.js"
+  },
+  "dependencies": {},
+  "optionalDependencies": {
+    "robots-parser": "^3.0.1"
+  }
+}

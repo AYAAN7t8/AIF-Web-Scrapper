@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pricing — Sieve</title>
+  <meta name="description" content="Free, Pro and Teams plans for Sieve.">
+  <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+  <script>try{var t=localStorage.getItem('sieve.theme');t=t?JSON.parse(t):(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body data-page="pricing">
+  <div id="site-nav"></div>
+  <main class="container">
+    <div class="page-head center"><span class="eyebrow">Pricing</span><h1>Simple plans</h1><p class="lead" style="margin-inline:auto">Everything runs in your browser, so the free plan is the full scraper.</p></div>
+    <div class="grid grid-3" style="padding-bottom:var(--s-6)">
+      <article class="card price-card">
+        <h3>Free</h3><p class="text-sm muted">For individuals and one-off jobs.</p>
+        <div class="price"><b>$0</b><span>forever</span></div>
+        <ul>
+          <li><span data-icon="check" data-size="16"></span>All 11 scraper modes</li>
+          <li><span data-icon="check" data-size="16"></span>Pagination crawling</li>
+          <li><span data-icon="check" data-size="16"></span>Bulk scrape up to 500 URLs</li>
+          <li><span data-icon="check" data-size="16"></span>CSV, XLSX, clipboard, Sheets</li>
+          <li><span data-icon="check" data-size="16"></span>Self-hosted optional proxy</li>
+        </ul>
+        <a class="btn btn-block" href="app.html">Launch App</a>
+      </article>
+      <article class="card price-card featured">
+        <span class="badge badge-primary ribbon">Most popular</span>
+        <h3>Pro</h3><p class="text-sm muted">For people who scrape every day.</p>
+        <div class="price"><b>$12</b><span>/ month</span></div>
+        <ul>
+          <li><span data-icon="check" data-size="16"></span>Everything in Free</li>
+          <li><span data-icon="check" data-size="16"></span>Saved scraper recipes</li>
+          <li><span data-icon="check" data-size="16"></span>Scheduled re-runs</li>
+          <li><span data-icon="check" data-size="16"></span>Hosted rendering proxy</li>
+          <li><span data-icon="check" data-size="16"></span>Priority support</li>
+        </ul>
+        <a class="btn btn-primary btn-block" href="signup.html?plan=pro">Start with Pro</a>
+      </article>
+      <article class="card price-card">
+        <h3>Teams</h3><p class="text-sm muted">For groups sharing data and recipes.</p>
+        <div class="price"><b>$29</b><span>/ user / month</span></div>
+        <ul>
+          <li><span data-icon="check" data-size="16"></span>Everything in Pro</li>
+          <li><span data-icon="check" data-size="16"></span>Shared workspaces</li>
+          <li><span data-icon="check" data-size="16"></span>Role-based access</li>
+          <li><span data-icon="check" data-size="16"></span>SSO and audit log</li>
+          <li><span data-icon="check" data-size="16"></span>Onboarding call</li>
+        </ul>
+        <a class="btn btn-block" href="mailto:hello@sieve.example?subject=Sieve%20Teams">Contact us</a>
+      </article>
+    </div>
+    <div class="banner banner-info" style="max-width:760px;margin:0 auto var(--s-12)"><span data-icon="info" data-size="16"></span><div>This build is a self-hosted, client-side project: Pro and Teams are illustrative plan designs for a hosted version and nothing is billed here.</div></div>
+  </main>
+  <div id="site-footer"></div>
+  <script src="js/main.js"></script>
+</body>
+</html>

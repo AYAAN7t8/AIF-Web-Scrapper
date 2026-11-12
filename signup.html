@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign up — Sieve</title>
+  <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+  <script>try{var t=localStorage.getItem('sieve.theme');t=t?JSON.parse(t):(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body data-page="signup">
+  <div id="site-nav"></div>
+  <main class="auth-wrap">
+    <div class="card auth-card">
+      <h1>Create your account</h1>
+      <p class="muted text-sm">Free forever. The scraper works without one too.</p>
+      <form id="auth-form" novalidate>
+        <div class="field"><label for="name">Name</label><input class="input" id="name" type="text" autocomplete="name" placeholder="Ada Lovelace" required><div class="field-error" id="name-err"></div></div>
+        <div class="field"><label for="email">Work email</label><input class="input" id="email" type="email" autocomplete="email" placeholder="you@company.com" required><div class="field-error" id="email-err"></div></div>
+        <div class="field"><label for="pw">Password</label><input class="input" id="pw" type="password" autocomplete="new-password" placeholder="At least 8 characters" required><div class="field-error" id="pw-err"></div></div>
+        <button class="btn btn-primary btn-block" type="submit">Create account</button>
+      </form>
+      <p class="text-xs muted center">By continuing you agree to scrape responsibly and respect each site's Terms of Service.</p>
+      <p class="text-sm muted center">Already have an account? <a class="link-btn" href="login.html">Log in</a></p>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+  <script>
+    Sieve.ready(function () {
+      document.getElementById('auth-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+        var f = { name: document.getElementById('name'), email: document.getElementById('email'), pw: document.getElementById('pw') }, ok = true;
+        Object.keys(f).forEach(function (k) { f[k].classList.remove('is-invalid'); document.getElementById(k + '-err').textContent = ''; });
+        function bad(k, m) { f[k].classList.add('is-invalid'); document.getElementById(k + '-err').textContent = m; ok = false; }
+        if (f.name.value.trim().length < 2) bad('name', 'Enter your name.');
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email.value)) bad('email', 'Enter a valid email address.');
+        if (f.pw.value.length < 8) bad('pw', 'Password must be at least 8 characters.');
+        if (!ok) return;
+        Sieve.toast('This local build has no account server — nothing was sent or stored. Opening the app…', 'info', 2500);
+        setTimeout(function () { location.href = 'app.html'; }, 1400);
+      });
+    });
+  </script>
+</body>
+</html>

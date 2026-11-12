@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Scraper — Sieve</title>
+  <meta name="description" content="Sieve scraper workspace: auto table detection, email, phone, links, images, reviews, people, business, social and B2B extraction — all in your browser.">
+  <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+  <script>try{var t=localStorage.getItem('sieve.theme');t=t?JSON.parse(t):(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body class="app-body" data-page="app">
+
+  <!-- Top bar -->
+  <header class="app-top">
+    <button class="btn btn-ghost btn-icon mobile-only" type="button" id="open-sidebar" aria-label="Open modes menu"><span data-icon="menu" data-size="18"></span></button>
+    <a class="brand" href="index.html" aria-label="Sieve home"><img class="brand-mark" src="assets/logo.svg" alt="" width="26" height="26"><span>Sieve</span></a>
+    <form class="url-form" id="url-form" autocomplete="off">
+      <div class="input-group">
+        <span data-icon="globe" data-size="16"></span>
+        <input class="input" id="url-input" type="text" inputmode="url" placeholder="https://example.com/products" aria-label="Page URL" spellcheck="false">
+      </div>
+      <button class="btn btn-primary" type="submit" id="fetch-btn"><span data-icon="play" data-size="16"></span><span id="fetch-label">Fetch</span></button>
+      <span class="status-pill" id="status-pill" data-status="idle" role="status" aria-live="polite"><span class="dot"></span><span>Idle</span></span>
+      <button class="link-btn demo-link" type="button" id="demo-link">Use Demo Data</button>
+    </form>
+    <div class="actions">
+      <button class="btn btn-ghost btn-icon theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode"><span class="icon-sun" data-icon="sun" data-size="18"></span><span class="icon-moon" data-icon="moon" data-size="18"></span></button>
+      <button class="btn btn-ghost btn-icon" type="button" id="toggle-inspector" aria-label="Toggle inspector panel" data-tip="Inspector" data-tip-pos="bottom"><span data-icon="panel-right" data-size="18"></span></button>
+    </div>
+  </header>
+
+  <div class="notice-bar" role="note">
+    <span data-icon="alert" data-size="14"></span>
+    <span><strong>Only scrape sites you have permission to scrape.</strong> <span class="long">Respect robots.txt and each site's Terms of Service.</span></span>
+  </div>
+
+  <div class="app-shell" id="shell">
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar" aria-label="Scraper modes and options">
+      <div>
+        <div class="side-label">Mode</div>
+        <div class="mode-list" id="mode-list" role="radiogroup" aria-label="Scraper mode"></div>
+      </div>
+      <div>
+        <div class="side-label">Options</div>
+        <div class="opts">
+          <div class="field"><label for="opt-delay">Delay between pages (ms)</label><input class="input input-sm" id="opt-delay" type="number" min="0" step="100" value="1000"></div>
+          <div class="field"><label for="opt-max">Max pages</label><input class="input input-sm" id="opt-max" type="number" min="1" max="500" step="1" value="10"></div>
+          <div class="field"><label for="opt-wait">Max wait (ms)</label><input class="input input-sm" id="opt-wait" type="number" min="1000" step="1000" value="15000"></div>
+          <label class="switch"><span>Follow pagination</span><input type="checkbox" id="opt-follow"><span class="track"></span></label>
+          <label class="switch"><span>Infinite scroll</span><input type="checkbox" id="opt-scroll"><span class="track"></span></label>
+          <label class="switch"><span>Deduplicate rows</span><input type="checkbox" id="opt-dedupe" checked><span class="track"></span></label>
+        </div>
+      </div>
+      <div id="proxy-box">
+        <div class="side-label">Proxy <span class="badge" style="margin-left:4px;text-transform:none;letter-spacing:0">optional</span></div>
+        <div class="opts">
+          <label class="switch"><span>Use local proxy</span><input type="checkbox" id="proxy-on"><span class="track"></span></label>
+          <div class="field"><label for="proxy-url">Proxy URL</label><input class="input input-sm mono" id="proxy-url" type="url" value="http://localhost:8787" spellcheck="false"></div>
+          <div class="row"><button class="btn btn-xs" type="button" id="proxy-test">Test connection</button><span class="text-xs muted" id="proxy-status" aria-live="polite"></span></div>
+          <p class="text-xs muted">Needed for CORS-blocked sites, JavaScript-rendered pages and infinite scroll. <a class="link-btn" style="font-size:12px" href="docs.html#cors">Setup →</a></p>
+        </div>
+      </div>
+      <div class="side-foot">
+        <button class="btn btn-sm btn-block" type="button" id="paste-html"><span data-icon="clipboard" data-size="16"></span>Paste page HTML…</button>
+      </div>
+    </aside>
+
+    <!-- Workspace -->
+    <main class="workspace" id="workspace">
+      <div class="work-head">
+        <span class="icon-tile" id="mode-icon" data-icon="table" data-size="20"></span>
+        <div style="min-width:0"><h2 id="mode-title">Auto Table</h2><p id="mode-desc">Detects the largest repeating table or list on the page.</p></div>
+        <span class="spacer"></span>
+        <div class="tabs" role="tablist" aria-label="Scrape source">
+          <button class="tab" role="tab" type="button" data-pane="single" aria-selected="true">Single URL</button>
+          <button class="tab" role="tab" type="button" data-pane="bulk" aria-selected="false">Bulk URLs</button>
+        </div>
+      </div>
+
+      <div class="stack" id="banners" style="margin-top:0"></div>
+
+      <!-- Single URL: page preview -->
+      <section class="card" id="pane-single" aria-label="Page preview">
+        <div class="card-head">
+          <h3>Page preview</h3>
+          <span class="badge" id="preview-badge">no page</span>
+          <span class="spacer"></span>
+          <button class="btn btn-ghost btn-xs" type="button" id="preview-toggle"><span data-icon="chevron-down" data-size="14"></span><span>Collapse</span></button>
+        </div>
+        <div class="preview-frame" id="preview-frame">
+          <div class="preview-ph" id="preview-ph">
+            <div class="empty"><span class="icon-tile neutral" data-icon="eye" data-size="22"></span><h3>Nothing fetched yet</h3><p>The fetched page is rendered here (scripts disabled) with the detected table outlined.</p></div>
+          </div>
+          <iframe id="preview-iframe" title="Rendered preview of the fetched page" sandbox="" referrerpolicy="no-referrer" hidden></iframe>
+        </div>
+      </section>
+
+      <!-- Bulk URLs -->
+      <section class="card" id="pane-bulk" aria-label="Bulk URLs" hidden>
+        <div class="card-head"><h3>Bulk URLs</h3><span class="badge" id="bulk-count">0 URLs</span><span class="spacer"></span><button class="btn btn-ghost btn-xs" type="button" id="bulk-sample">Load sample</button></div>
+        <div class="bulk-box">
+          <textarea class="textarea mono" id="bulk-input" placeholder="https://example.com/page-1&#10;https://example.com/page-2&#10;…one URL per line (up to 500)" spellcheck="false" aria-label="URLs, one per line"></textarea>
+          <div class="row row-wrap">
+            <button class="btn btn-primary" type="button" id="bulk-run"><span data-icon="layers" data-size="16"></span>Scrape All</button>
+            <button class="btn btn-danger-ghost" type="button" id="bulk-stop" hidden><span data-icon="square" data-size="16"></span>Stop</button>
+            <div class="progress" id="bulk-progress" style="flex:1;min-width:120px;max-width:280px" hidden><span></span></div>
+            <span class="text-sm muted" id="bulk-meta" aria-live="polite"></span>
+            <a class="link-btn" href="bulk.html" style="margin-left:auto">Open the full bulk workspace →</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Results -->
+      <section class="card" id="results-card" aria-label="Results">
+        <div class="card-head">
+          <h3 id="results-title">Results</h3>
+          <span class="badge" id="results-count">0 rows</span>
+          <span class="spacer"></span>
+          <button class="btn btn-xs" type="button" id="try-another" hidden><span data-icon="refresh" data-size="14"></span><span id="try-label">Try another table</span></button>
+          <div class="tabs tabs-sm" id="view-tabs" role="tablist" aria-label="Result view" hidden></div>
+        </div>
+        <div class="table-tools" id="view-actions" style="border-top:0" hidden></div>
+
+        <div data-state="empty">
+          <div class="empty">
+            <span class="icon-tile" data-icon="sparkles" data-size="22"></span>
+            <h3>Paste a URL and press Fetch</h3>
+            <p>Pick a mode on the left. Sieve fetches the page in your browser, finds the data and shows it here — rename or switch off columns before you export.</p>
+            <div class="row">
+              <button class="btn btn-primary btn-sm" type="button" data-demo="table">Demo: product table</button>
+              <button class="btn btn-sm" type="button" data-demo="cards">Demo: card grid (no table)</button>
+              <button class="btn btn-sm" type="button" data-action="paste-html">Paste HTML</button>
+            </div>
+          </div>
+        </div>
+
+        <div data-state="loading" hidden></div>
+
+        <div data-state="error" hidden>
+          <div class="empty">
+            <span class="icon-tile danger" data-icon="circle-x" data-size="22"></span>
+            <h3 id="err-title">Couldn't read that page</h3>
+            <p id="err-msg"></p>
+            <div class="row">
+              <button class="btn btn-primary btn-sm" type="button" data-demo="table">Use Demo Data</button>
+              <button class="btn btn-sm" type="button" data-action="paste-html">Paste page HTML</button>
+              <button class="btn btn-sm" type="button" data-action="proxy-help">Use the proxy</button>
+              <a class="btn btn-ghost btn-sm" id="err-open" href="#" target="_blank" rel="noopener noreferrer"><span data-icon="external" data-size="14"></span>Open the page</a>
+            </div>
+          </div>
+        </div>
+
+        <div data-state="none" hidden>
+          <div class="empty">
+            <span class="icon-tile warning" data-icon="search" data-size="22"></span>
+            <h3 id="none-title">Nothing found</h3>
+            <p id="none-msg"></p>
+            <div class="row"><button class="btn btn-sm" type="button" data-action="paste-html">Paste rendered HTML</button><button class="btn btn-sm" type="button" data-demo="table">Try demo data</button></div>
+          </div>
+        </div>
+
+        <div data-state="data" hidden>
+          <div id="alt-host" hidden></div>
+          <div id="table-host"></div>
+        </div>
+
+        <div class="table-tools" id="crawl-tools" style="flex-wrap:wrap">
+          <button class="btn btn-sm" type="button" id="btn-next" disabled><span data-icon="chevron-right" data-size="16"></span>Scrape Next Page</button>
+          <button class="btn btn-sm btn-primary" type="button" id="btn-crawl"><span data-icon="repeat" data-size="16"></span><span id="crawl-label">Crawl All Pages (10)</span></button>
+          <button class="btn btn-sm btn-danger-ghost" type="button" id="btn-stop" hidden><span data-icon="square" data-size="16"></span>Stop</button>
+          <div class="progress" id="crawl-progress" hidden><span></span></div>
+          <span class="meta" id="crawl-meta" aria-live="polite"></span>
+        </div>
+      </section>
+    </main>
+
+    <!-- Inspector -->
+    <aside class="inspector" id="inspector" aria-label="Export and schema">
+      <div class="insp-section">
+        <h3>Export <button class="btn btn-ghost btn-icon btn-sm mobile-only" type="button" id="close-inspector" aria-label="Close inspector"><span data-icon="x" data-size="16"></span></button></h3>
+        <div class="export-grid">
+          <button class="btn btn-sm" type="button" id="exp-csv"><span data-icon="download" data-size="16"></span>Export CSV</button>
+          <button class="btn btn-sm" type="button" id="exp-xlsx"><span data-icon="sheet" data-size="16"></span>Export XLSX</button>
+          <button class="btn btn-sm" type="button" id="exp-copy"><span data-icon="copy" data-size="16"></span>Copy to Clipboard</button>
+          <button class="btn btn-sm" type="button" id="exp-sheets"><span data-icon="upload" data-size="16"></span>Google Sheets</button>
+        </div>
+        <p class="text-xs muted" style="margin-top:10px">Exports use your renamed, enabled columns.</p>
+      </div>
+      <div class="insp-section">
+        <h3>Schema <span class="row" style="gap:2px"><button class="btn btn-ghost btn-xs" type="button" id="cols-all">All</button><button class="btn btn-ghost btn-xs" type="button" id="cols-none">None</button></span></h3>
+        <div id="schema-host"></div>
+      </div>
+      <div class="insp-section">
+        <h3>Stats</h3>
+        <div class="stat-grid">
+          <div class="stat"><b id="st-rows">0</b><span>Rows found</span></div>
+          <div class="stat"><b id="st-cols">0</b><span>Columns</span></div>
+          <div class="stat"><b id="st-pages">0</b><span>Pages scraped</span></div>
+          <div class="stat"><b id="st-time">0 ms</b><span>Time elapsed</span></div>
+        </div>
+        <button class="btn btn-ghost btn-sm btn-block" type="button" id="clear-results" style="margin-top:12px"><span data-icon="trash" data-size="16"></span>Clear results</button>
+      </div>
+    </aside>
+  </div>
+
+  <footer class="statusbar">
+    <span class="priv"><span data-icon="lock" data-size="14"></span>Runs in your browser</span>
+    <span id="sb-rows">0 rows</span>
+    <span class="hide-mobile" id="sb-src"></span>
+    <span class="spacer"></span>
+    <a href="#" id="report-issue"><span data-icon="bug" data-size="12" style="vertical-align:-2px"></span> Report an Issue</a>
+  </footer>
+  <div class="scrim" id="scrim"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" defer></script>
+  <script src="js/main.js"></script>
+  <script src="js/demo.js"></script>
+  <script src="js/extractors.js"></script>
+  <script src="js/scraper.js"></script>
+  <script src="js/export.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

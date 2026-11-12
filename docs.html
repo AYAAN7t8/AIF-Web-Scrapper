@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Docs — Sieve</title>
+  <meta name="description" content="Sieve documentation: quick start, modes, pagination, bulk scrape, export, CORS and proxy, FAQ.">
+  <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+  <script>try{var t=localStorage.getItem('sieve.theme');t=t?JSON.parse(t):(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body data-page="docs">
+  <div id="site-nav"></div>
+  <div class="container docs-layout">
+    <nav class="docs-nav" id="docs-nav" aria-label="Documentation">
+      <a href="#quick-start">Quick Start</a><a href="#modes">Modes</a><a href="#pagination">Pagination</a><a href="#bulk">Bulk Scrape</a><a href="#export">Export</a><a href="#cors">CORS &amp; proxy</a><a href="#faq">FAQ</a>
+    </nav>
+    <article class="docs-content">
+      <section id="quick-start">
+        <h1>Documentation</h1>
+        <p class="lead">Everything you need to scrape responsibly with Sieve.</p>
+        <h2>Quick Start</h2>
+        <ol>
+          <li>Open <a href="app.html">the scraper</a> and paste a URL into the top bar (or press <kbd>/</kbd>).</li>
+          <li>Pick a mode on the left. <strong>Auto Table</strong> is the default.</li>
+          <li>Press <strong>Fetch</strong>. Rows appear in the table; the detected block is outlined in the preview.</li>
+          <li>Rename headers (click them) or untick columns you don't want.</li>
+          <li>Export from the inspector: CSV, XLSX, clipboard or Google Sheets.</li>
+        </ol>
+        <div class="banner banner-warning" style="margin-top:16px"><span data-icon="alert" data-size="16"></span><div><strong>Only scrape sites you have permission to scrape.</strong> Respect robots.txt and each site's Terms of Service. Don't collect personal data you have no lawful basis to hold.</div></div>
+        <p>No site handy? Click <strong>Use Demo Data</strong>. It loads a built-in virtual shop (<code>demo://shop</code>) that has a product table, pagination, contacts, social links, team cards, reviews, a company profile and images.</p>
+      </section>
+
+      <section id="modes">
+        <h2>Modes</h2>
+        <table class="doc-table"><thead><tr><th>Mode</th><th>What it extracts</th></tr></thead><tbody>
+          <tr><td>Auto Table</td><td>Largest table or repeating list; one row per record, one column per field (plus link and image columns).</td></tr>
+          <tr><td>Email</td><td>Regex over visible text plus <code>mailto:</code> links, "[at]/[dot]" obfuscation, Cloudflare-protected addresses and JSON-LD.</td></tr>
+          <tr><td>Phone</td><td>Regex over text plus <code>tel:</code> links; dates, IPs and implausible lengths are dropped.</td></tr>
+          <tr><td>Links</td><td>Unique absolute URLs with anchor text and an internal/external flag.</td></tr>
+          <tr><td>Images</td><td><code>img</code>, <code>srcset</code>, <code>source</code>, CSS backgrounds and og:image. Tick images, then download a ZIP.</td></tr>
+          <tr><td>Page Text</td><td>Readable text with script, style, nav, footer and forms removed, grouped by heading.</td></tr>
+          <tr><td>Reviews</td><td>schema.org Review markup, JSON-LD, then review-like blocks with star heuristics.</td></tr>
+          <tr><td>People</td><td>Repeated cards containing a name and a job title/role.</td></tr>
+          <tr><td>Business</td><td>JSON-LD organisations, microdata, and company/address/industry blocks.</td></tr>
+          <tr><td>Social</td><td>Facebook, X/Twitter, Instagram, LinkedIn, YouTube, TikTok profiles (share links excluded).</td></tr>
+          <tr><td>B2B</td><td>Business + People combined with employee count, revenue and founding-year heuristics.</td></tr>
+        </tbody></table>
+        <p>Changing the mode after a fetch re-extracts the already downloaded page — no second request.</p>
+        <h3>Try another table</h3>
+        <p>If the wrong block was picked, use <strong>Try another table</strong> to cycle through every candidate Sieve found.</p>
+      </section>
+
+      <section id="pagination">
+        <h2>Pagination</h2>
+        <p>Sieve looks for the next page in this order: <code>&lt;link rel="next"&gt;</code> / <code>a[rel~=next]</code>, links with an "next" <code>aria-label</code>, pagination wrappers (the item after the active page or a <code>.next</code> link), then short link text such as <em>Next, →, », siguiente, suivant</em>.</p>
+        <ul>
+          <li><strong>Scrape Next Page</strong> appends one more page.</li>
+          <li><strong>Crawl All Pages (N)</strong> keeps going with your <em>Delay</em> until there is no next link or <em>Max pages</em> is reached.</li>
+          <li>Every row can carry <code>source_url</code> and <code>page_index</code> columns, which appear automatically once more than one page is scraped.</li>
+          <li><strong>Infinite scroll</strong> and "load more" buttons need JavaScript, so they require the <a href="#cors">optional proxy</a>.</li>
+        </ul>
+      </section>
+
+      <section id="bulk">
+        <h2>Bulk Scrape</h2>
+        <p>Use the Bulk URLs tab in the app, or the dedicated <a href="bulk.html">bulk page</a>. Paste up to 500 URLs (one per line). Each URL gets a status — pending, running, done or error — and all rows are merged into one table with a <code>source_url</code> column. Filter chips narrow the table by site. Failed URLs can be retried.</p>
+        <p>Requests run with limited concurrency (default 3) and a delay between them. Be kind to servers.</p>
+      </section>
+
+      <section id="export">
+        <h2>Export</h2>
+        <ul>
+          <li><strong>CSV</strong> — UTF-8 with a BOM so Excel reads accents correctly.</li>
+          <li><strong>XLSX</strong> — generated with SheetJS, file name <code>scraped-data-&lt;timestamp&gt;.xlsx</code>.</li>
+          <li><strong>Copy</strong> — tab-separated, paste straight into a spreadsheet.</li>
+          <li><strong>Google Sheets</strong> — either copy and paste into <code>sheets.new</code>, or use a webhook (below).</li>
+        </ul>
+        <p>Exports contain only enabled columns, using your renamed headers. Cells that start with <code>=</code>, <code>@</code> or look like <code>+cmd</code> are prefixed with an apostrophe to prevent spreadsheet formula injection (toggle <code>SANITIZE_FORMULAS</code> in <code>js/export.js</code>).</p>
+        <h3>Google Sheets webhook</h3>
+        <p>Create a new Apps Script project, paste this, then <em>Deploy → New deployment → Web app</em> (Execute as: Me, Access: Anyone). Paste the <code>/exec</code> URL in the export dialog or into <code>GOOGLE_WEBHOOK_URL</code> at the top of <code>js/export.js</code>.</p>
+<pre><code>function doPost(e) {
+  var data = JSON.parse(e.postData.contents);
+  var ss = SpreadsheetApp.create(data.title || "Sieve export");
+  var sheet = ss.getActiveSheet();
+  var rows = [data.headers].concat(data.rows);
+  sheet.getRange(1, 1, rows.length, data.headers.length).setValues(rows);
+  return ContentService.createTextOutput(JSON.stringify({ ok: true, url: ss.getUrl() }))
+    .setMimeType(ContentService.MimeType.JSON);
+}</code></pre>
+      </section>
+
+      <section id="cors">
+        <h2>CORS &amp; the optional proxy</h2>
+        <p>Browsers only let a page read another site's HTML if that site opts in with CORS headers. Many don't, and some pages build their content with JavaScript that a plain fetch never runs. Sieve then shows a friendly error with three ways out: demo data, <em>Paste page HTML</em>, or the proxy.</p>
+<pre><code>npm install
+node proxy-server.js      # http://localhost:8787</code></pre>
+        <p>Turn on <em>Use local proxy</em> in the sidebar and press <em>Test connection</em>. The proxy then:</p>
+        <ul>
+          <li>fetches pages server-side, so CORS no longer applies;</li>
+          <li>renders JavaScript and scrolls to the bottom with Puppeteer (when installed);</li>
+          <li>checks <code>robots.txt</code>, limits itself to 1 request/second per domain and identifies itself with a public User-Agent;</li>
+          <li>binds to localhost only and refuses private-network targets.</li>
+        </ul>
+      </section>
+
+      <section id="faq">
+        <h2>FAQ</h2>
+        <details class="faq"><summary>Does my data leave my browser?</summary><div>No. Fetching, parsing, detection and exports all run locally. The proxy runs on your own machine. The only third-party requests are the fonts and the SheetJS / JSZip libraries from CDNs.</div></details>
+        <details class="faq"><summary>Why did Fetch fail on a big site?</summary><div>Most large sites don't send CORS headers. Use the proxy, or paste the page HTML.</div></details>
+        <details class="faq"><summary>The table is empty or wrong.</summary><div>The page may render its data with JavaScript. Try the proxy, paste rendered HTML from DevTools, or use "Try another table".</div></details>
+        <details class="faq"><summary>Is scraping legal?</summary><div>It depends on the site's terms, the data and your jurisdiction. Get permission, respect robots.txt, rate-limit yourself, and avoid personal data without a lawful basis. This is not legal advice.</div></details>
+        <details class="faq"><summary>Can I log in to a site and scrape it?</summary><div>Requests are sent without cookies. For pages behind a login, open the page, copy the rendered HTML and use <em>Paste page HTML</em>.</div></details>
+      </section>
+    </article>
+  </div>
+  <div id="site-footer"></div>
+  <script src="js/main.js"></script>
+  <script>Sieve.ready(function () { Sieve.scrollSpy('#docs-nav'); });</script>
+</body>
+</html>
