@@ -777,7 +777,7 @@
       var b = doc.createElement('base'); b.setAttribute('href', finalUrl); head.insertBefore(b, head.firstChild);
     }
     var st = doc.createElement('style');
-    st.textContent = 'a{pointer-events:none}[data-sieve-hit]{outline:3px solid #5B5BFF !important;outline-offset:2px;box-shadow:0 0 0 6px rgba(91,91,255,.18) !important;border-radius:4px}';
+    st.textContent = 'a{pointer-events:none}[data-sieve-hit]{outline:3px solid #0D7480 !important;outline-offset:2px;box-shadow:0 0 0 6px rgba(91,91,255,.18) !important;border-radius:4px}';
     head.appendChild(st);
     return '<!doctype html>' + clone.outerHTML;
   }

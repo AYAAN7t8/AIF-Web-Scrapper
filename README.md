@@ -17,6 +17,10 @@ Open index.html         → demo data only; real sites need the server above (br
 > **Screenshots** — placeholders, drop your own captures in `assets/screenshots/`:
 > `![Landing](assets/screenshots/landing.png)` · `![Scraper workspace](assets/screenshots/app.png)` · `![Bulk scrape](assets/screenshots/bulk.png)` · `![Dark mode](assets/screenshots/dark.png)`
 
+## Design
+
+Frost-and-slate palette with a single teal accent, one typeface (Switzer), one corner radius, flat colour fields instead of gradients, no resting shadows. The home page is composed around the product itself: a sentence split by a working frame, switch bands, one card across four fields, one row in three states. Tokens live in `css/theme.css`, the home composition in `css/home.css` and `js/home.js`. Light and dark themes share the same tokens. Museum pictures (public domain, credited in the footer) come from The Metropolitan Museum of Art.
+
 ## Pages
 
 | File | Purpose |

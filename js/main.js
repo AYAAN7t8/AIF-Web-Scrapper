@@ -361,7 +361,7 @@
   };
 
   /* ------------------------------------------------------------ site chrome */
-  var LOGO = '<svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#5B5BFF"/>' +
+  var LOGO = '<svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#0D7480"/>' +
     '<path d="M8 9h16l-6 7.2V23l-4 2v-8.8z" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>' +
     '<circle cx="23.5" cy="23.5" r="2.2" fill="#00C48C"/></svg>';
   Sieve.logoSvg = LOGO;
@@ -393,29 +393,20 @@
         '<a class="brand" href="index.html" aria-label="Sieve home">' + LOGO + 'Sieve</a>' +
         '<nav class="nav-links" aria-label="Primary">' + links + '</nav>' +
         '<div class="nav-actions">' +
-        '<a class="btn btn-ghost hide-mobile" href="login.html">Log in</a>' +
         themeButton() +
         '<a class="btn btn-primary hide-mobile" href="app.html">Launch App</a>' +
         '<button class="btn btn-ghost btn-icon nav-burger" type="button" id="nav-burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"><span data-icon="menu" data-size="20"></span></button>' +
         '</div></div></header>' +
         '<div class="mobile-menu" id="mobile-menu">' + links +
-        '<a href="pricing.html">Pricing</a><a href="login.html">Log in</a>' +
         '<a class="btn btn-primary" href="app.html">Launch App</a></div>';
     }
     var footHost = document.getElementById('site-footer');
     if (footHost) {
       footHost.outerHTML =
-        '<footer class="footer"><div class="container">' +
-        '<div class="footer-grid">' +
-        '<div><a class="brand" href="index.html">' + LOGO + 'Sieve</a>' +
-        '<p class="text-sm muted" style="margin-top:12px;max-width:300px">Point-and-click web scraping that runs entirely in your browser. Tables, contacts, images and more — exported in one click.</p></div>' +
-        '<div><h4>Product</h4><ul><li><a href="app.html">Scraper</a></li><li><a href="scrapers.html">Built-in Scrapers</a></li><li><a href="bulk.html">Bulk Scrape</a></li><li><a href="pricing.html">Pricing</a></li></ul></div>' +
-        '<div><h4>Resources</h4><ul><li><a href="how-it-works.html">How It Works</a></li><li><a href="docs.html">Docs</a></li><li><a href="docs.html#cors">CORS &amp; proxy</a></li><li><a href="docs.html#faq">FAQ</a></li></ul></div>' +
-        '<div><h4>Account</h4><ul><li><a href="login.html">Log in</a></li><li><a href="signup.html">Sign up</a></li><li><a href="' + Sieve.config.issueUrl + '">Report an issue</a></li></ul></div>' +
-        '</div>' +
-        '<div class="footer-bottom"><span>&copy; 2026 Sieve. Only scrape sites you have permission to scrape.</span>' +
-        '<span class="privacy-badge"><span data-icon="lock" data-size="14"></span>Runs in your browser — your data never leaves.</span></div>' +
-        '</div></footer>';
+        '<footer class="footer">' +
+        '<div class="foot-line"><span>Sieve: scrape what you see</span>' +
+        '<nav aria-label="Footer"><a href="app.html">Scraper</a><a href="docs.html">Docs</a><a href="index.html#extension">Extension</a><a href="' + Sieve.config.issueUrl + '">Report an issue</a></nav>' +
+        '<span>&copy; 2026 &middot; <a href="docs.html#cors">Privacy</a></span></div></footer>';
     }
     Sieve.icons.hydrate(document);
 

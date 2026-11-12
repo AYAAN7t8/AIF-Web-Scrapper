@@ -1,174 +1,250 @@
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Sieve — Scrape any website, instantly</title>
-  <meta name="description" content="AI table detection, email and phone extraction, bulk URLs and CSV/Excel/Sheets export. Sieve runs entirely in your browser.">
+  <title>Sieve: any page, a clean table</title>
+  <meta name="description" content="Sieve turns any web page, including pages behind your login, into a clean table. Detect tables, follow pagination, export CSV, Excel or Sheets. Runs in your browser.">
   <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
-  <script src="js/theme-init.js"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://api.fontshare.com">
+  <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
+  <link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/pages.css">
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/home.css">
+  <script src="js/theme-init.js"></script>
 </head>
-<body data-page="index">
+<body data-page="home">
+  <a class="skip-link" href="#main">Skip to content</a>
   <div id="site-nav"></div>
 
-  <main>
-    <!-- Hero -->
-    <section class="hero">
-      <div class="container hero-grid">
-        <div class="hero-copy">
-          <span class="eyebrow-pill"><span class="badge badge-primary">New</span>Runs 100% in your browser</span>
-          <h1>Scrape Any Website — <em>Instantly</em></h1>
-          <p class="lead">AI table detection · Email &amp; phone extraction · Bulk URLs · CSV/Excel/Sheets export. Paste a link, review the data, download it.</p>
-          <form class="hero-form" id="hero-form" autocomplete="off">
-            <input id="hero-url" type="text" inputmode="url" placeholder="https://example.com/products" aria-label="URL to scrape" spellcheck="false">
-            <button class="btn btn-gradient btn-lg" type="submit">Scrape Now<span data-icon="arrow-right" data-size="16"></span></button>
-          </form>
-          <div class="hero-note">
-            <span><span data-icon="circle-check" data-size="14"></span>No sign-up</span>
-            <span><span data-icon="circle-check" data-size="14"></span>Optional <a class="link-btn" href="downloads/sieve-extension.zip" download>Chrome extension</a></span>
-            <span><span data-icon="circle-check" data-size="14"></span>Try it on <a class="link-btn" href="app.html?demo=1">demo data</a></span>
-          </div>
-        </div>
+  <main id="main">
 
-        <div class="mock" aria-hidden="true">
-          <div class="mock-chip c1"><span class="dot"></span>Table detected · 12 rows</div>
-          <div class="mock-chip c2"><span data-icon="sheet" data-size="14" style="color:var(--primary)"></span>products.xlsx</div>
-          <div class="mock-window">
-            <div class="mock-bar"><i></i><i></i><i></i><div class="mock-url"><span>fernwood.example/shop</span></div></div>
-            <div class="mock-body">
-              <div class="mock-side"><b class="on"></b><b></b><b></b><b></b><b></b><b></b></div>
-              <div class="mock-main">
-                <div class="mock-progress"></div>
-                <div class="mock-status"><span class="pill"></span><span>Auto Table · 6 columns</span></div>
-                <div class="mock-table">
-                  <div class="tr th"><span>Product</span><span>Category</span><span>Price</span></div>
-                  <div class="tr"><span>Aero Desk Lamp</span><span>Lighting</span><span>$39.00</span></div>
-                  <div class="tr"><span>Birch Monitor Riser</span><span>Desk</span><span>$54.50</span></div>
-                  <div class="tr"><span>Cedar Cable Tray</span><span>Organization</span><span>$18.90</span></div>
-                  <div class="tr"><span>Dune Ergonomic Mouse</span><span>Peripherals</span><span>$47.00</span></div>
-                  <div class="tr"><span>Ember Task Light</span><span>Lighting</span><span>$62.00</span></div>
-                  <div class="tr"><span>Fjord Standing Mat</span><span>Wellness</span><span>$71.25</span></div>
+    <!-- Hero: a sentence split by a working frame. The frame is a real piece of the product. -->
+    <section class="hero" id="hero" aria-labelledby="hero-h1">
+      <div class="hero-track">
+        <div class="hero-stage">
+          <h1 class="hero-h1" id="hero-h1">
+            <span class="hl hl-a"><span class="ln">Any page,</span></span>
+            <span class="hl hl-b"><span class="ln">a clean table.</span></span>
+          </h1>
+
+          <div class="reel" id="reel" role="group" aria-roledescription="carousel" aria-label="Sieve in four steps">
+            <div class="reel-strip" id="reel-strip">
+
+              <figure class="frame is-active" data-step="0" data-ui aria-label="Step: paste a link">
+                <form class="fr-form" id="hero-form" action="app.html" method="get" autocomplete="off">
+                  <label class="fr-label" for="hero-url">Page to scrape</label>
+                  <div class="fr-field">
+                    <input id="hero-url" name="url" type="text" inputmode="url" placeholder="https://shop.example/laptops" spellcheck="false">
+                    <input type="hidden" name="autorun" value="1">
+                    <button class="btn btn-primary" type="submit">Scrape</button>
+                  </div>
+                  <p class="fr-note">Paste any public link. For pages you are logged in to, use the extension below.</p>
+                  <p class="fr-modes"><span class="on">Auto table</span><span>Emails</span><span>Phones</span><span>Links</span><span>Images</span><span>Reviews</span></p>
+                </form>
+              </figure>
+
+              <figure class="frame" data-step="1" data-ui aria-label="Step: Sieve finds the rows">
+                <div class="fr-head"><b>12 rows, 6 columns found</b><span>Auto table</span></div>
+                <div class="fr-found">
+                  <div class="fr-row"><span>Aero Desk Lamp</span><span>Lighting</span><span>$39.00</span></div>
+                  <div class="fr-row"><span>Birch Monitor Riser</span><span>Desk</span><span>$54.50</span></div>
+                  <div class="fr-row"><span>Cedar Cable Tray</span><span>Organization</span><span>$18.90</span></div>
+                  <div class="fr-row"><span>Dune Ergonomic Mouse</span><span>Peripherals</span><span>$47.00</span></div>
                 </div>
-                <div class="mock-export"><b class="p">Export CSV</b><b>XLSX</b><b>Copy</b><b>Sheets</b></div>
-              </div>
+                <p class="fr-alt">Also found: a repeated list of 12 product cards. <u>Try another table</u></p>
+              </figure>
+
+              <figure class="frame" data-step="2" data-ui aria-label="Step: you shape the columns">
+                <div class="fr-head"><b>Shape the columns</b><span>click a name to rename it</span></div>
+                <table class="fr-table">
+                  <thead><tr><th>Product</th><th>Category</th><th class="edit">price_usd</th><th class="off">SKU</th></tr></thead>
+                  <tbody>
+                    <tr><td>Aero Desk Lamp</td><td>Lighting</td><td>39.00</td><td class="off">FW-1001</td></tr>
+                    <tr><td>Birch Monitor Riser</td><td>Desk</td><td>54.50</td><td class="off">FW-1002</td></tr>
+                    <tr><td>Cedar Cable Tray</td><td>Organization</td><td>18.90</td><td class="off">FW-1003</td></tr>
+                  </tbody>
+                </table>
+                <p class="fr-alt">SKU is switched off and will not be exported.</p>
+              </figure>
+
+              <figure class="frame" data-step="3" data-ui aria-label="Step: it leaves as a file">
+                <div class="fr-head"><b>Export</b><span>12 rows, 5 columns</span></div>
+                <div class="fr-export"><span class="done">CSV</span><span>Excel</span><span>Copy</span><span>Sheets</span></div>
+                <div class="fr-file"><b>scraped-data.csv</b><span>UTF-8 · opens in Excel · 1.1 KB</span></div>
+                <p class="fr-alt">Saved to your downloads. Nothing left your browser.</p>
+              </figure>
+
             </div>
           </div>
+
+          <div class="hero-foot">
+            <p class="hero-lede">Paste a link, or scrape the page you are logged in to. Sieve finds the rows, you shape the columns, and the file never leaves your browser.</p>
+            <div class="hero-actions">
+              <a class="btn btn-primary btn-lg" href="app.html">Scrape a page</a>
+              <a class="link-arrow" href="#extension">Get the Chrome extension</a>
+            </div>
+          </div>
+
+          <div class="reel-steps" id="reel-steps" role="tablist" aria-label="Steps">
+            <button type="button" role="tab" aria-selected="true" data-go="0">Link</button>
+            <button type="button" role="tab" aria-selected="false" data-go="1">Rows</button>
+            <button type="button" role="tab" aria-selected="false" data-go="2">Columns</button>
+            <button type="button" role="tab" aria-selected="false" data-go="3">File</button>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Features -->
-    <section class="section" style="padding-top:var(--s-6)" id="features">
-      <div class="container">
-        <div class="section-head center"><span class="eyebrow">Everything in one place</span><h2>The best of two scrapers, as a website</h2><p class="lead">Table auto-detection with pagination on one side, one-click contact and media extraction with bulk URLs on the other.</p></div>
-        <div class="grid grid-3">
-          <article class="card card-hover feature"><span class="icon-tile" data-icon="sparkles" data-size="20"></span><h3>AI Table Auto-Detection</h3><p>Scores every table and finds repeating card lists, so the right data is selected without clicking a single selector.</p><span class="badge src">Table scraper</span></article>
-          <article class="card card-hover feature"><span class="icon-tile" data-icon="repeat" data-size="20"></span><h3>Pagination &amp; Infinite Scroll</h3><p>Follows "Next" links with a delay and page cap. Infinite feeds scroll to the end through the optional local proxy.</p><span class="badge src">Table scraper</span></article>
-          <article class="card card-hover feature"><span class="icon-tile success" data-icon="mail" data-size="20"></span><h3>Email + Phone + Contact Extractor</h3><p>Emails, phone numbers, social profiles, businesses and people — pulled from text, mailto/tel links and structured data.</p><span class="badge src">Built-in scrapers</span></article>
-          <article class="card card-hover feature"><span class="icon-tile warning" data-icon="image" data-size="20"></span><h3>Bulk Image Downloader</h3><p>Finds &lt;img&gt;, srcset and CSS background images. Tick the ones you want and download a ZIP.</p><span class="badge src">Built-in scrapers</span></article>
-          <article class="card card-hover feature"><span class="icon-tile" data-icon="layers" data-size="20"></span><h3>Bulk Multi-URL Scraping</h3><p>Paste up to 500 URLs and get one combined table with a source_url column and per-URL status.</p><span class="badge src">Built-in scrapers</span></article>
-          <article class="card card-hover feature"><span class="icon-tile success" data-icon="sheet" data-size="20"></span><h3>CSV · XLSX · Google Sheets export</h3><p>Rename or hide columns first — what you see in the preview is exactly what lands in your file.</p><span class="badge src">Both</span></article>
+    <!-- What it does: sentences with switches -->
+    <section class="bands" id="features" aria-labelledby="features-h">
+      <h2 class="sr-only" id="features-h">What Sieve does for you</h2>
+
+      <div class="band" data-on="true" style="--band:var(--field-3)" data-reveal>
+        <div class="band-in">
+          <p class="band-s" id="b1">It finds the table by itself</p>
+          <button class="sw" type="button" role="switch" aria-checked="true" aria-labelledby="b1" data-ui><span></span></button>
+          <p class="band-c"><b data-count="12">12</b> rows by 6 columns on the demo shop. Every table and repeated list is scored, and the biggest wins.</p>
+        </div>
+      </div>
+      <div class="band" data-on="false" style="--band:var(--field-4)" data-reveal>
+        <div class="band-in">
+          <p class="band-s" id="b2">It follows the Next button</p>
+          <button class="sw" type="button" role="switch" aria-checked="false" aria-labelledby="b2" data-ui><span></span></button>
+          <p class="band-c"><b data-count="36">36</b> rows over 3 pages from one click, with your own delay between pages.</p>
+        </div>
+      </div>
+      <div class="band" data-on="true" style="--band:var(--field-2)" data-reveal>
+        <div class="band-in">
+          <p class="band-s" id="b3">It reads pages behind your login</p>
+          <button class="sw" type="button" role="switch" aria-checked="true" aria-labelledby="b3" data-ui><span></span></button>
+          <p class="band-c">The extension reads the tab you are looking at, as you see it. Nothing is uploaded to read it.</p>
+        </div>
+      </div>
+      <div class="band" data-on="false" style="--band:var(--field-3)" data-reveal>
+        <div class="band-in">
+          <p class="band-s" id="b4">It scrolls endless feeds for you</p>
+          <button class="sw" type="button" role="switch" aria-checked="false" aria-labelledby="b4" data-ui><span></span></button>
+          <p class="band-c">Stop it whenever you like and keep what has loaded, or cancel. Esc stops too.</p>
+        </div>
+      </div>
+      <div class="band" data-on="false" style="--band:var(--field-4)" data-reveal>
+        <div class="band-in">
+          <p class="band-s" id="b5">It leaves as CSV, Excel or Sheets</p>
+          <button class="sw" type="button" role="switch" aria-checked="false" aria-labelledby="b5" data-ui><span></span></button>
+          <p class="band-c">CSV with a BOM so Excel reads accents, real XLSX, and a one-click copy that pastes straight into Google Sheets.</p>
         </div>
       </div>
     </section>
 
-    <!-- Built-in scrapers -->
-    <section class="section" style="background:var(--surface);border-block:1px solid var(--border)" id="builtin">
-      <div class="container">
-        <div class="section-head center"><span class="eyebrow">Built-in scrapers</span><h2>One click for the data you usually want</h2></div>
-        <div class="pill-row">
-          <a class="scraper-pill" href="app.html?preset=email"><span class="icon-tile" data-icon="mail" data-size="14"></span>Email</a>
-          <a class="scraper-pill" href="app.html?preset=phone"><span class="icon-tile" data-icon="phone" data-size="14"></span>Phone</a>
-          <a class="scraper-pill" href="app.html?preset=business"><span class="icon-tile" data-icon="building" data-size="14"></span>Business</a>
-          <a class="scraper-pill" href="app.html?preset=people"><span class="icon-tile" data-icon="user" data-size="14"></span>People</a>
-          <a class="scraper-pill" href="app.html?preset=social"><span class="icon-tile" data-icon="globe" data-size="14"></span>Social</a>
-          <a class="scraper-pill" href="app.html?preset=b2b"><span class="icon-tile" data-icon="briefcase" data-size="14"></span>B2B</a>
-          <a class="scraper-pill" href="app.html?preset=review"><span class="icon-tile" data-icon="star" data-size="14"></span>Review</a>
-          <a class="scraper-pill" href="app.html?preset=text"><span class="icon-tile" data-icon="file-text" data-size="14"></span>Page Text</a>
+    <!-- How it works: one card, four fields -->
+    <section class="strip" id="how" aria-labelledby="how-h">
+      <div class="field f1">
+        <h2 id="how-h">Link to file</h2>
+        <div class="rc" data-ui>
+          <div class="rc-top"><b>shop.example/lamp</b><span>waiting</span></div>
+          <p class="rc-empty">Fetching the page…</p>
         </div>
-        <p class="center" style="margin-top:var(--s-3)"><a class="link-btn" href="scrapers.html">Browse the full catalog →</a></p>
+        <p class="clause">First it lands as a link.</p>
+      </div>
+      <div class="field f2">
+        <div class="rc" data-ui>
+          <div class="rc-top"><b>Aero Desk Lamp</b><span>row 1 of 12</span></div>
+          <dl><dt>category</dt><dd>Lighting</dd><dt>price</dt><dd>$39.00</dd><dt>rating</dt><dd>4.6</dd><dt>stock</dt><dd>In stock</dd></dl>
+        </div>
+        <p class="clause">Then Sieve finds the rows.</p>
+      </div>
+      <div class="field f3">
+        <div class="rc" data-ui>
+          <div class="rc-top"><b>Aero Desk Lamp</b><span>edited</span></div>
+          <dl><dt>category</dt><dd>Lighting</dd><dt class="new">price_usd</dt><dd>39.00</dd><dt class="gone">rating</dt><dd class="gone">4.6</dd><dt>stock</dt><dd>In stock</dd></dl>
+        </div>
+        <p class="clause">Then you shape the columns.</p>
+      </div>
+      <div class="field f4">
+        <div class="rc" data-ui>
+          <div class="rc-top"><b>Aero Desk Lamp</b><span class="ok">exported</span></div>
+          <dl><dt>file</dt><dd>scraped-data.csv</dd><dt>row</dt><dd>1 of 12</dd><dt>columns</dt><dd>5</dd></dl>
+        </div>
+        <p class="clause">Then it leaves as a file.</p>
       </div>
     </section>
 
-    <!-- How it works -->
-    <section class="section" id="how">
-      <div class="container">
-        <div class="section-head center"><span class="eyebrow">How it works</span><h2>From URL to spreadsheet in three steps</h2></div>
-        <div class="steps">
-          <div class="card step"><h3>Paste URL</h3><p>Drop in any public page. Sieve fetches it from your browser — nothing passes through our servers.</p></div>
-          <div class="card step"><h3>Auto-detect</h3><p>The biggest table or repeating list is highlighted and turned into columns. Switch modes for emails, images, reviews and more.</p></div>
-          <div class="card step"><h3>Export</h3><p>Rename and filter columns, crawl more pages if you like, then download CSV or XLSX, copy, or send to Google Sheets.</p></div>
-        </div>
-        <p class="center" style="margin-top:var(--s-3)"><a class="link-btn" href="how-it-works.html">See the visual walkthrough →</a></p>
-      </div>
-    </section>
+    <!-- One row, three states -->
+    <section class="states g12 wrap" id="row" aria-labelledby="row-h">
+      <h2 id="row-h">One row's journey</h2>
 
-    <!-- Use cases -->
-    <section class="section-tight" style="padding-top:0">
-      <div class="container">
-        <div class="section-head center"><h2 style="font-size:1.6rem">Built for people who live in spreadsheets</h2></div>
-        <div class="usecases">
-          <div class="card card-hover usecase"><span class="icon-tile" data-icon="target" data-size="20"></span>Sales</div>
-          <div class="card card-hover usecase"><span class="icon-tile" data-icon="users" data-size="20"></span>Recruiters</div>
-          <div class="card card-hover usecase"><span class="icon-tile" data-icon="cart" data-size="20"></span>E-commerce</div>
-          <div class="card card-hover usecase"><span class="icon-tile" data-icon="flask" data-size="20"></span>Researchers</div>
-          <div class="card card-hover usecase"><span class="icon-tile" data-icon="trending" data-size="20"></span>SEO</div>
-          <div class="card card-hover usecase"><span class="icon-tile" data-icon="bar-chart" data-size="20"></span>BI teams</div>
-        </div>
-      </div>
-    </section>
+      <div class="st-line"><p class="st-word">Found</p>
+        <div class="row-ui" data-ui><span class="rx"></span><b>Aero Desk Lamp</b><span>Lighting</span><span>$39.00</span><span>4.6</span><span>In stock</span></div></div>
 
-    <!-- Privacy -->
-    <section class="section-tight" style="padding-top:0">
-      <div class="container">
-        <div class="card privacy-band"><span class="privacy-badge"><span data-icon="lock" data-size="14"></span>🔒 Runs in your browser — your data never leaves.</span><span class="muted text-sm">Scraping, detection and exports all happen locally. The optional proxy runs on your own machine.</span></div>
-      </div>
+      <div class="st-line"><p class="st-word">Edited</p>
+        <div class="row-ui is-live" data-ui id="live-row"><label class="rx-wrap"><input type="checkbox" id="live-check" aria-label="Include this row in the file"><span class="rx"></span></label><b>Aero Desk Lamp</b><span>Lighting</span><span>$39.00</span><span>4.6</span><span class="live-state" id="live-state">Tick to include</span></div></div>
+
+      <div class="st-line"><p class="st-word">Exported</p>
+        <div class="row-ui is-done" data-ui><span class="rx on"></span><b>Aero Desk Lamp</b><span>Lighting</span><span>$39.00</span><span>4.6</span><span>In scraped-data.csv</span></div></div>
     </section>
 
     <!-- Chrome extension -->
-    <section class="section-tight" style="padding-top:0" id="extension">
-      <div class="container">
-        <div class="card card-pad ext-band">
-          <div class="ext-copy">
-            <span class="badge badge-primary">Chrome extension</span>
-            <h2>Scrape pages behind your login</h2>
-            <p class="muted">A website can't see the pages you are logged in to. The Sieve extension can: it reads the page in your own tab, shows a preview, and one click sends the full table here. It can scroll infinite feeds for you, and you can stop it any time.</p>
-            <div class="row row-wrap">
-              <a class="btn btn-gradient btn-lg" href="downloads/sieve-extension.zip" download id="ext-download"><span data-icon="download" data-size="16"></span>Download the extension</a>
-              <a class="btn btn-lg" href="docs.html#extension">How to install</a>
-            </div>
-            <p class="text-sm subtle">Free · Chrome / Edge / Brave · about 0.5 MB · only scrape what you are allowed to.</p>
+    <section class="ext" id="extension" aria-labelledby="ext-h">
+      <div class="ext-in g12 wrap">
+        <div class="ext-copy">
+          <h2 id="ext-h">Scrape pages behind your login</h2>
+          <p>A website cannot see the pages you are logged in to. The Sieve extension can, because it runs in your own browser. It reads the tab in front of you, shows a preview, and one click sends the full table here. It scrolls infinite feeds and you can stop it at any moment.</p>
+          <div class="ext-actions">
+            <a class="btn btn-primary btn-lg" href="downloads/sieve-extension.zip" download id="ext-download">Download the extension</a>
+            <a class="link-arrow" href="docs.html#extension">How to install</a>
           </div>
           <ol class="ext-steps">
-            <li><b>Download</b> and unzip the file.</li>
-            <li>Open <code>chrome://extensions</code> and switch on <b>Developer mode</b>.</li>
-            <li>Click <b>Load unpacked</b> and pick the <code>sieve-extension</code> folder.</li>
-            <li>Open any page, click the <b>Sieve</b> icon, then <b>Scrape this page</b>.</li>
+            <li>Unzip the download.</li>
+            <li>Open <code>chrome://extensions</code> and switch on Developer mode.</li>
+            <li>Choose Load unpacked and pick the <code>sieve-extension</code> folder.</li>
+            <li>Open any page, click the Sieve icon, press Scrape this page.</li>
           </ol>
         </div>
+        <figure class="ext-pic">
+          <img src="assets/sieve.jpg" width="1600" height="941" alt="An old woven palm-fibre sieve tray resting on a grey table" loading="lazy" decoding="async" id="ext-img">
+        </figure>
       </div>
     </section>
 
-    <!-- CTA -->
-    <section class="section" style="padding-top:var(--s-4)">
-      <div class="container">
-        <div class="cta-banner">
-          <h2>Stop copy-pasting. Start scraping.</h2>
-          <p>Open the scraper and try it on demo data in under ten seconds.</p>
-          <div class="row row-wrap" style="justify-content:center"><a class="btn btn-gradient btn-lg" href="app.html">Launch App</a><a class="btn btn-lg" href="app.html?demo=1">Try demo data</a></div>
-          <p class="text-sm subtle">Only scrape sites you have permission to scrape. Respect robots.txt and Terms of Service.</p>
-        </div>
+    <!-- Proof: measured results on real sites -->
+    <section class="proof wrap" id="proof" aria-labelledby="proof-h">
+      <div class="tiles">
+        <div class="tile tile-head"><h2 id="proof-h">Tested on real sites</h2><p>Results from live pages, found automatically.</p></div>
+        <div class="tile" data-reveal><b>Books to Scrape</b><span>20 books</span></div>
+        <div class="tile" data-reveal><b>Quotes to Scrape</b><span>30 quotes, 3 pages</span></div>
+        <div class="tile" data-reveal><b>Scrape This Site</b><span>250 countries</span></div>
+        <div class="tile" data-reveal><b>python.org</b><span>274 releases</span></div>
+        <div class="tile" data-reveal><b>Wikipedia</b><span>86 rows</span></div>
+        <figure class="tile tile-pic" data-reveal><img src="assets/sieve-2.jpg" width="1400" height="1289" alt="A round woven sieve seen from above, its reeds crossing in a fine mesh" loading="lazy" decoding="async"></figure>
       </div>
     </section>
+
+    <!-- The name: a sieve keeps what you want -->
+    <section class="why g12 wrap" id="why" aria-labelledby="why-h">
+      <div class="why-copy">
+        <h2 id="why-h">Why it is called Sieve</h2>
+        <p>A sieve keeps what you want and lets the rest fall through. We do that with web pages.</p>
+        <figure class="why-woman" data-reveal><img src="assets/peasant-woman-with-winnowing-basket.jpg" width="1000" height="1273" alt="Nineteenth-century photograph of a young woman tipping grain and chaff in a large woven winnowing basket" loading="lazy" decoding="async"></figure>
+      </div>
+      <figure class="why-gold" data-reveal><img src="assets/strainer.jpg" width="1400" height="1120" alt="An ancient gold strainer, its bowl pierced with hundreds of small holes" loading="lazy" decoding="async"></figure>
+    </section>
+
+    <!-- The sentence with a blank -->
+    <section class="cta wrap" id="start" aria-labelledby="cta-h">
+      <form class="cta-form" id="cta-form" action="app.html" method="get" autocomplete="off">
+        <h2 id="cta-h">Turn <input id="cta-url" name="url" type="text" inputmode="url" placeholder="a link" aria-label="Page link" spellcheck="false"><input type="hidden" name="autorun" value="1"> into a <button type="submit">table</button></h2>
+        <p>Opens the scraper and runs it on that page. Nothing is stored. Only scrape pages you are allowed to.</p>
+      </form>
+    </section>
+
   </main>
 
   <div id="site-footer"></div>
+  <p class="foot-credit">Pictures, all public domain (CC0) from The Metropolitan Museum of Art: <a href="https://www.metmuseum.org/art/collection/search/474934">Sieve tray</a> and <a href="https://www.metmuseum.org/art/collection/search/474935">round sieve</a> (palm leaf and fiber, 580&ndash;640, Coptic); <a href="https://www.metmuseum.org/art/collection/search/545169">Strainer</a> (gold, ca. 1290&ndash;1224 BCE); <a href="https://www.metmuseum.org/art/collection/search/288842">Peasant woman with winnowing basket</a> (late 1870s).</p>
 
   <script src="js/main.js"></script>
   <script src="js/home.js"></script>

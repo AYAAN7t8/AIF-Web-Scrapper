@@ -41,7 +41,8 @@ function walk(dir, filter, acc) {
 const files = [];
 files.push(path.join(ROOT, 'manifest.json'));
 fs.readdirSync(ROOT).filter((f) => f.endsWith('.html')).forEach((f) => files.push(path.join(ROOT, f)));
-['ext', 'css', 'js', 'assets', 'vendor'].forEach((d) => walk(path.join(ROOT, d), () => true, files));
+// the large museum photographs belong to the website only; the extension does not need them
+['ext', 'css', 'js', 'assets', 'vendor'].forEach((d) => walk(path.join(ROOT, d), (rel) => !/.jpg$|credits.json$/.test(rel), files));
 
 const zip = new JSZip();
 const fixedDate = new Date(Date.UTC(2026, 0, 1));

@@ -24,10 +24,10 @@ function capturePage(autoscroll) {
       host.style.cssText = 'all:initial;position:fixed;z-index:2147483647;right:16px;bottom:16px;';
       var sh = host.attachShadow({ mode: 'open' });
       sh.innerHTML =
-        '<style>.b{font:13px/1.4 system-ui,Segoe UI,Arial,sans-serif;background:#0b0b0f;color:#fff;border:1px solid #2a2a35;border-radius:12px;padding:12px 14px;box-shadow:0 8px 30px rgba(0,0,0,.35);display:flex;flex-direction:column;gap:8px;min-width:230px}' +
-        '.t{display:flex;align-items:center;gap:8px;font-weight:600}.d{width:8px;height:8px;border-radius:50%;background:#5b5bff;animation:p 1s infinite}@keyframes p{50%{opacity:.25}}' +
+        '<style>.b{font:13px/1.4 system-ui,Segoe UI,Arial,sans-serif;background:#0f1a1f;color:#fff;border:1px solid #26383f;border-radius:12px;padding:12px 14px;box-shadow:0 8px 30px rgba(0,0,0,.35);display:flex;flex-direction:column;gap:8px;min-width:230px}' +
+        '.t{display:flex;align-items:center;gap:8px;font-weight:600}.d{width:8px;height:8px;border-radius:50%;background:#0d7480;animation:p 1s infinite}@keyframes p{50%{opacity:.25}}' +
         '.s{color:#a1a1b0;font-weight:400;font-size:12px}.r{display:flex;gap:8px}button{font:inherit;border-radius:8px;padding:6px 10px;border:1px solid #3a3a48;background:#1a1a22;color:#fff;cursor:pointer}' +
-        'button.p{background:#5b5bff;border-color:#5b5bff}button:hover{filter:brightness(1.15)}</style>' +
+        'button.p{background:#0d7480;border-color:#0d7480}button:hover{filter:brightness(1.15)}</style>' +
         '<div class="b"><div class="t"><span class="d"></span>Sieve is scrolling this page</div><div class="s" id="s">Loading more content…</div>' +
         '<div class="r"><button class="p" id="stop">Stop &amp; use what loaded</button><button id="cancel">Cancel</button></div><div class="s">Esc also stops</div></div>';
       label = sh.getElementById('s');
@@ -80,7 +80,7 @@ async function scrape(msg) {
   var tabId = msg.tabId;
   jobs[tabId] = { mode: msg.mode, autoscroll: !!msg.autoscroll, startedAt: Date.now() };
   startKeepAlive();
-  chrome.action.setBadgeBackgroundColor({ color: '#5B5BFF' });
+  chrome.action.setBadgeBackgroundColor({ color: '#0D7480' });
   chrome.action.setBadgeText({ text: msg.autoscroll ? '…' : '' });
   try {
     var res = await chrome.scripting.executeScript({ target: { tabId: tabId }, func: capturePage, args: [!!msg.autoscroll] });
