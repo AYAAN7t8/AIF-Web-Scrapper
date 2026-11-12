@@ -15,6 +15,9 @@
   <link rel="stylesheet" href="css/theme.css">
   <link rel="stylesheet" href="css/home.css">
   <link rel="stylesheet" href="css/motion.css">
+  <link rel="stylesheet" href="css/hero.css">
+  <link rel="stylesheet" href="css/journey.css">
+  <link rel="stylesheet" href="css/fit.css">
   <script src="js/theme-init.js"></script>
 </head>
 <body data-page="home">
@@ -23,81 +26,26 @@
 
   <main id="main">
 
-    <!-- Hero: a sentence split by a working frame. The frame is a real piece of the product. -->
-    <section class="hero" id="hero" aria-labelledby="hero-h1">
-      <div class="hero-track">
-        <div class="hero-stage">
-          <div class="dots" aria-hidden="true"><i class="moon" style="--c:var(--dot-cyan);--d:0.2"></i><i style="--x:4%;--y:52%;--s:190px;--c:var(--dot-coral);--d:0.9"></i><i style="--x:22%;--y:8%;--s:44px;--c:var(--dot-amber);--d:0.5"></i><i style="--x:38%;--y:6%;--s:28px;--c:var(--dot-cyan);--d:1.2"></i><i style="--x:35%;--y:88%;--s:64px;--c:var(--dot-white);--d:0.6"></i><i style="--x:63%;--y:8%;--s:56px;--c:var(--dot-amber);--d:1"></i><i style="--x:84%;--y:55%;--s:250px;--c:var(--dot-cyan);--d:0.4"></i><i style="--x:92%;--y:10%;--s:40px;--c:var(--dot-coral);--d:1.3"></i><i style="--x:9%;--y:30%;--s:20px;--c:var(--dot-white);--d:1.1"></i><i style="--x:90%;--y:74%;--s:26px;--c:var(--dot-amber);--d:0.8"></i><i style="--x:58%;--y:70%;--s:18px;--c:var(--dot-coral);--d:1.4"></i></div>
-          <h1 class="hero-h1" id="hero-h1">
-            <span class="hl hl-a"><span class="ln">Any page,</span></span>
-            <span class="hl hl-b"><span class="ln">a clean table.</span></span>
-          </h1>
-
-          <div class="reel" id="reel" role="group" aria-roledescription="carousel" aria-label="Sieve in four steps">
-            <div class="reel-strip" id="reel-strip">
-
-              <figure class="frame is-active" data-step="0" data-ui aria-label="Step: paste a link">
-                <form class="fr-form" id="hero-form" action="app.html" method="get" autocomplete="off">
-                  <label class="fr-label" for="hero-url">Page to scrape</label>
-                  <div class="fr-field">
-                    <input id="hero-url" name="url" type="text" inputmode="url" placeholder="https://shop.example/laptops" spellcheck="false">
-                    <input type="hidden" name="autorun" value="1">
-                    <button class="btn btn-primary" type="submit">Scrape</button>
-                  </div>
-                  <p class="fr-note">Paste any public link. For pages you are logged in to, use the extension below.</p>
-                  <p class="fr-modes"><span class="on">Auto table</span><span>Emails</span><span>Phones</span><span>Links</span><span>Images</span><span>Reviews</span></p>
-                </form>
-              </figure>
-
-              <figure class="frame" data-step="1" data-ui aria-label="Step: Sieve finds the rows">
-                <div class="fr-head"><b>12 rows, 6 columns found</b><span>Auto table</span></div>
-                <div class="fr-found">
-                  <div class="fr-row"><span>Aero Desk Lamp</span><span>Lighting</span><span>$39.00</span></div>
-                  <div class="fr-row"><span>Birch Monitor Riser</span><span>Desk</span><span>$54.50</span></div>
-                  <div class="fr-row"><span>Cedar Cable Tray</span><span>Organization</span><span>$18.90</span></div>
-                  <div class="fr-row"><span>Dune Ergonomic Mouse</span><span>Peripherals</span><span>$47.00</span></div>
-                </div>
-                <p class="fr-alt">Also found: a repeated list of 12 product cards. <u>Try another table</u></p>
-              </figure>
-
-              <figure class="frame" data-step="2" data-ui aria-label="Step: you shape the columns">
-                <div class="fr-head"><b>Shape the columns</b><span>click a name to rename it</span></div>
-                <table class="fr-table">
-                  <thead><tr><th>Product</th><th>Category</th><th class="edit">price_usd</th><th class="off">SKU</th></tr></thead>
-                  <tbody>
-                    <tr><td>Aero Desk Lamp</td><td>Lighting</td><td>39.00</td><td class="off">FW-1001</td></tr>
-                    <tr><td>Birch Monitor Riser</td><td>Desk</td><td>54.50</td><td class="off">FW-1002</td></tr>
-                    <tr><td>Cedar Cable Tray</td><td>Organization</td><td>18.90</td><td class="off">FW-1003</td></tr>
-                  </tbody>
-                </table>
-                <p class="fr-alt">SKU is switched off and will not be exported.</p>
-              </figure>
-
-              <figure class="frame" data-step="3" data-ui aria-label="Step: it leaves as a file">
-                <div class="fr-head"><b>Export</b><span>12 rows, 5 columns</span></div>
-                <div class="fr-export"><span class="done">CSV</span><span>Excel</span><span>Copy</span><span>Sheets</span></div>
-                <div class="fr-file"><b>scraped-data.csv</b><span>UTF-8 · opens in Excel · 1.1 KB</span></div>
-                <p class="fr-alt">Saved to your downloads. Nothing left your browser.</p>
-              </figure>
-
-            </div>
-          </div>
-
-          <div class="hero-foot">
-            <p class="hero-lede">Paste a link, or scrape the page you are logged in to. Sieve finds the rows, you shape the columns, and the file never leaves your browser.</p>
-            <div class="hero-actions">
-              <a class="btn btn-primary btn-lg" href="app.html">Scrape a page</a>
-              <a class="link-arrow" href="#extension">Get the Chrome extension</a>
-            </div>
-          </div>
-
-          <div class="reel-steps" id="reel-steps" role="tablist" aria-label="Steps">
-            <button type="button" role="tab" aria-selected="true" data-go="0">Link</button>
-            <button type="button" role="tab" aria-selected="false" data-go="1">Rows</button>
-            <button type="button" role="tab" aria-selected="false" data-go="2">Columns</button>
-            <button type="button" role="tab" aria-selected="false" data-go="3">File</button>
-          </div>
-        </div>
+    <!-- Hero: one sentence, the logo set as a word, on a quiet field of drifting points -->
+    <section class="hero hx" id="hero" aria-labelledby="hero-h1">
+      <canvas class="hx-sky" id="hx-sky" aria-hidden="true"></canvas>
+      <div class="hx-in">
+        <h1 class="hx-h1" id="hero-h1" aria-label="Turn any page into a clean table."><span class="hx-w" style="--i:0">Turn</span> <span class="hx-w" style="--i:1">any</span> <span class="hx-w" style="--i:2">page</span> <span class="hx-chip" style="--i:3"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#32BFDA"/><path d="M7.5 8.5h17l-6.4 7.4V22l-4.2 2v-8.1z" fill="none" stroke="#0A0A0A" stroke-width="2.2" stroke-linejoin="round"/><circle cx="9.2" cy="24.2" r="2.1" fill="#FF5E57"/><circle cx="23.4" cy="24.4" r="2.1" fill="#FCC55F"/></svg></span> <span class="hx-w" style="--i:4">into</span> <span class="hx-w" style="--i:5">a</span> <span class="hx-w" style="--i:6">clean</span> <span class="hx-w" style="--i:7">table.</span></h1>
+        <p class="hx-sub">Sieve finds the rows on any web page, lets you keep the columns you want, and saves them as CSV, Excel or Google Sheets. No account, nothing stored.</p>
+        <form class="hx-form" id="hero-form" action="app.html" method="get" autocomplete="off">
+          <label class="sr-only" for="hero-url">Page to scrape</label>
+          <input id="hero-url" name="url" type="text" inputmode="url" placeholder="https://books.toscrape.com" spellcheck="false">
+          <input type="hidden" name="autorun" value="1">
+          <button class="btn btn-primary" type="submit">Scrape it</button>
+        </form>
+        <p class="hx-alt">Logged-in page? <a href="#extension">Download the Chrome extension</a></p>
+        <ul class="hx-stats">
+          <li><b>11</b><span>ways to extract</span></li>
+          <li><b>4</b><span>ways to export</span></li>
+          <li><b>0</b><span>sign-ups</span></li>
+        </ul>
+        <p class="hx-label">Tested on live pages</p>
+        <div class="hx-sites"><div class="hx-sites-track"><span style="--c:var(--coral)">Books to Scrape</span><span style="--c:var(--amber)">Quotes to Scrape</span><span style="--c:var(--cyan)">Scrape This Site</span><span style="--c:var(--coral)">python.org</span><span style="--c:var(--amber)">Wikipedia</span><span style="--c:var(--coral)" aria-hidden="true">Books to Scrape</span><span style="--c:var(--amber)" aria-hidden="true">Quotes to Scrape</span><span style="--c:var(--cyan)" aria-hidden="true">Scrape This Site</span><span style="--c:var(--coral)" aria-hidden="true">python.org</span><span style="--c:var(--amber)" aria-hidden="true">Wikipedia</span><span style="--c:var(--coral)" aria-hidden="true">Books to Scrape</span><span style="--c:var(--amber)" aria-hidden="true">Quotes to Scrape</span><span style="--c:var(--cyan)" aria-hidden="true">Scrape This Site</span><span style="--c:var(--coral)" aria-hidden="true">python.org</span><span style="--c:var(--amber)" aria-hidden="true">Wikipedia</span><span style="--c:var(--coral)" aria-hidden="true">Books to Scrape</span><span style="--c:var(--amber)" aria-hidden="true">Quotes to Scrape</span><span style="--c:var(--cyan)" aria-hidden="true">Scrape This Site</span><span style="--c:var(--coral)" aria-hidden="true">python.org</span><span style="--c:var(--amber)" aria-hidden="true">Wikipedia</span></div></div>
       </div>
     </section>
 
@@ -175,18 +123,44 @@
       </div>
     </section>
 
-    <!-- One row, three states -->
-    <section class="states g12 wrap" id="row" data-motion="states" aria-labelledby="row-h">
-      <h2 id="row-h">One row's journey</h2>
-
-      <div class="st-line"><p class="st-word">Found</p>
-        <div class="row-ui" data-ui><span class="rx"></span><b>Aero Desk Lamp</b><span>Lighting</span><span>$39.00</span><span>4.6</span><span>In stock</span></div></div>
-
-      <div class="st-line"><p class="st-word">Edited</p>
-        <div class="row-ui is-live" data-ui id="live-row"><label class="rx-wrap"><input type="checkbox" id="live-check" aria-label="Include this row in the file"><span class="rx"></span></label><b>Aero Desk Lamp</b><span>Lighting</span><span>$39.00</span><span>4.6</span><span class="live-state" id="live-state">Tick to include</span></div></div>
-
-      <div class="st-line"><p class="st-word">Exported</p>
-        <div class="row-ui is-done" data-ui><span class="rx on"></span><b>Aero Desk Lamp</b><span>Lighting</span><span>$39.00</span><span>4.6</span><span>In scraped-data.csv</span></div></div>
+    <!-- One row's journey: the same row on the page, in Sieve and in the file. Scrolling moves each word to its next place. -->
+    <section class="jr" id="row" aria-labelledby="row-h">
+      <div class="jr-pin">
+        <div class="jr-side">
+          <h2 id="row-h">One row's journey</h2>
+          <ol class="jr-steps">
+            <li data-s="0"><b>Found</b><p>On the page it is a product card, one of twelve that look alike.</p></li>
+            <li data-s="1"><b>Shaped</b><p>In Sieve it becomes columns. Price is renamed and cleaned, SKU is switched off.</p></li>
+            <li data-s="2"><b>Exported</b><p>In your file it is one line of text that opens in any spreadsheet.</p></li>
+          </ol>
+        </div>
+        <div class="jr-stage" id="jr-stage">
+          <figure class="jr-g jr-g0" data-g="0" data-k="box" data-ui>
+            <figcaption class="jr-cap">Found</figcaption>
+            <span class="jr-thumb" data-k="thumb"><picture><source type="image/webp" srcset="assets/aero-runner-480.webp 480w, assets/aero-runner-800.webp 800w" sizes="(max-width: 899px) 72vw, 280px"><img src="assets/aero-runner-480.jpg" srcset="assets/aero-runner-480.jpg 480w, assets/aero-runner-800.jpg 800w" sizes="(max-width: 899px) 72vw, 280px" width="800" height="600" alt="Aero Runner sneaker in bright blue, floating above a soft shadow" decoding="async"></picture></span>
+            <span class="jr-name" data-k="name">Aero Runner</span>
+            <span class="jr-cat" data-k="cat">Sneakers</span>
+            <span class="jr-price" data-k="price">$89.00</span>
+            <span class="jr-meta"><span data-k="star">★</span><span data-k="rating">4.7</span><span data-k="stock">In stock</span></span>
+            <span class="jr-sku" data-k="sku">SKU FW-2041</span>
+          </figure>
+          <figure class="jr-g jr-g1" data-g="1" data-ui>
+            <figcaption class="jr-cap">Shaped</figcaption>
+            <div class="jr-heads"><span data-k="h-name">name</span><span data-k="h-cat">category</span><span data-k="h-price" class="is-renamed">price_usd</span><span data-k="h-rating" class="jr-wide">rating</span><span data-k="h-sku" class="jr-wide is-off">sku</span></div>
+            <div class="jr-row" data-k="box"><span data-k="name">Aero Runner</span><span data-k="cat">Sneakers</span><span data-k="price2" class="is-renamed">89.00</span><span data-k="rating" class="jr-wide">4.7</span><span data-k="sku2" class="jr-wide is-off">FW-2041</span></div>
+          </figure>
+          <figure class="jr-g jr-g2" data-g="2" data-ui>
+            <figcaption class="jr-cap">Exported</figcaption>
+            <div class="jr-file" data-k="box">
+              <div class="jr-ftop"><span class="jr-fname" data-k="file">scraped-data.csv</span><span class="jr-fmeta" data-k="fmeta">2 lines · 4 columns · UTF-8</span></div>
+              <div class="jr-csv">
+                <span class="jr-line jr-lh"><span class="jr-cell"><span data-k="h-name">name</span><span data-k="hc1">,</span></span><span class="jr-cell"><span data-k="h-cat">category</span><span data-k="hc2">,</span></span><span class="jr-cell"><span data-k="h-price">price_usd</span><span data-k="hc3">,</span></span><span class="jr-cell"><span data-k="h-rating">rating</span></span></span>
+                <span class="jr-line jr-lv"><span class="jr-cell"><span data-k="name">Aero Runner</span><span data-k="c1">,</span></span><span class="jr-cell"><span data-k="cat">Sneakers</span><span data-k="c2">,</span></span><span class="jr-cell"><span data-k="price2">89.00</span><span data-k="c3">,</span></span><span class="jr-cell"><span data-k="rating">4.7</span></span></span>
+              </div>
+            </div>
+          </figure>
+        </div>
+      </div>
     </section>
 
     <!-- Chrome extension -->
@@ -199,15 +173,18 @@
             <a class="btn btn-primary btn-lg" href="downloads/sieve-extension.zip" download id="ext-download">Download the extension</a>
             <a class="link-arrow" href="docs.html#extension">How to install</a>
           </div>
+          <details class="ext-how" id="ext-how" open>
+          <summary>Install in 4 steps</summary>
           <ol class="ext-steps">
             <li>Unzip the download.</li>
             <li>Open <code>chrome://extensions</code> and switch on Developer mode.</li>
             <li>Choose Load unpacked and pick the <code>sieve-extension</code> folder.</li>
             <li>Open any page, click the Sieve icon, press Scrape this page.</li>
           </ol>
+          </details>
         </div>
         <figure class="ext-pic">
-          <img src="assets/mesh-cyan.jpg" width="1000" height="1334" alt="Close-up of a cyan metal mesh with diamond-shaped holes against black" loading="lazy" decoding="async" id="ext-img">
+          <img src="assets/ill-extension.svg" width="1000" height="850" alt="A signed-in orders page in the browser. Sieve outlines the table it found, 48 rows, and its popup shows a preview with a Click to view more button, a CSV button and Stop scrolling." loading="lazy" decoding="async" id="ext-img">
         </figure>
       </div>
     </section>
@@ -221,7 +198,7 @@
         <div class="tile" data-reveal><b>Scrape This Site</b><span><em class="n" data-count="250">250</em> countries</span></div>
         <div class="tile" data-reveal><b>python.org</b><span><em class="n" data-count="274">274</em> releases</span></div>
         <div class="tile" data-reveal><b>Wikipedia</b><span><em class="n" data-count="86">86</em> rows</span></div>
-        <figure class="tile tile-pic" data-reveal><img src="assets/lines-black.jpg" width="1000" height="1500" alt="White wireframe lines of a building against a black sky" loading="lazy" decoding="async"></figure>
+        <figure class="tile tile-pic" data-reveal><img src="assets/ill-export.svg" width="900" height="600" alt="Five scraped rows flow into three files: CSV, Excel and Google Sheets." loading="lazy" decoding="async"></figure>
       </div>
     </section>
 
@@ -230,9 +207,9 @@
       <div class="why-copy">
         <h2 id="why-h">Why it is called Sieve</h2>
         <p>A sieve keeps what you want and lets the rest fall through. We do that with web pages.</p>
-        <figure class="why-woman" data-reveal><img src="assets/facade-cells.jpg" width="1000" height="1334" alt="Black and white facade made of a grid of square panels with rounded windows" loading="lazy" decoding="async"></figure>
+        <figure class="why-woman" data-reveal><img src="assets/ill-page.svg" width="800" height="1000" alt="What goes in: a busy shop page where the product cards sit among a banner ad, a discount pop-up, a sponsored box and a cookie bar." loading="lazy" decoding="async"></figure>
       </div>
-      <figure class="why-gold" data-reveal><img src="assets/lattice-bw.jpg" width="1400" height="933" alt="Diamond lattice of a steel and glass roof in black and white" loading="lazy" decoding="async"></figure>
+      <figure class="why-gold" data-reveal><img src="assets/ill-sieve.svg" width="1000" height="800" alt="What comes out: a sieve holds the product rows while ads, menus and pop-ups fall through, and the rows become a clean name and price table." loading="lazy" decoding="async"></figure>
     </section>
 
     <!-- The sentence with a blank -->
@@ -246,10 +223,11 @@
   </main>
 
   <div id="site-footer"></div>
-  <p class="foot-credit">Photographs from Pexels, free to use: <a href="https://www.pexels.com/photo/background-of-metal-net-fence-5800558/">cyan metal mesh</a>, <a href="https://www.pexels.com/photo/black-abstract-wallpaper-3137079/">wireframe building</a>, <a href="https://www.pexels.com/photo/abstract-geometric-architecture-pattern-29253548/">steel lattice roof</a>, <a href="https://www.pexels.com/photo/modern-minimalist-architecture-with-geometric-windows-31656454/">grid facade</a>.</p>
 
   <script src="js/main.js"></script>
+  <script src="js/hero.js"></script>
   <script src="js/home.js"></script>
   <script src="js/motion.js"></script>
+  <script src="js/journey.js"></script>
 </body>
 </html>

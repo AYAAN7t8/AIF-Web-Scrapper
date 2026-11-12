@@ -23,6 +23,7 @@
  */
 const http = require('http');
 const fs = require('fs');
+const zlib = require('zlib');
 const path = require('path');
 const dns = require('dns').promises;
 const net = require('net');
@@ -217,10 +218,15 @@ async function handleFetch(q, res) {
 const TYPES = {
   '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8',
   '.json': 'application/json', '.svg': 'image/svg+xml', '.png': 'image/png', '.ico': 'image/x-icon',
-  '.txt': 'text/plain; charset=utf-8', '.md': 'text/markdown; charset=utf-8', '.zip': 'application/zip', '.png': 'image/png'
+  '.txt': 'text/plain; charset=utf-8', '.md': 'text/markdown; charset=utf-8', '.zip': 'application/zip',
+  '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp', '.avif': 'image/avif', '.gif': 'image/gif',
+  '.woff2': 'font/woff2', '.webmanifest': 'application/manifest+json'
 };
 const ROOT = __dirname;
 const STATIC_BLOCK = /^\/(node_modules|\.|scripts|proxy-server|robots-|serve\.js|render\.yaml|package)/;
+const COMPRESSIBLE = /^(text\/|application\/(json|manifest)|image\/svg)/;
+/* compressed copies are kept per file and dropped when the file changes (mtime + size) */
+const zcache = new Map();
 
 function serveStatic(req, res, pathname) {
   let p;
@@ -228,12 +234,41 @@ function serveStatic(req, res, pathname) {
   if (p === '/') p = '/index.html';
   const file = path.normalize(path.join(ROOT, p));
   if (!file.startsWith(ROOT + path.sep) || STATIC_BLOCK.test(p)) { res.writeHead(403); return res.end('Forbidden'); }
-  fs.readFile(file, (err, data) => {
-    if (err) { res.writeHead(404, { 'Content-Type': 'text/plain' }); return res.end('Not found'); }
-    const headers = { 'Content-Type': TYPES[path.extname(file).toLowerCase()] || 'application/octet-stream', 'Cache-Control': 'no-cache' };
-    if (/\.zip$/i.test(file)) headers['Content-Disposition'] = 'attachment; filename="' + path.basename(file) + '"';
-    res.writeHead(200, headers);
-    res.end(data);
+  fs.stat(file, (serr, st) => {
+    if (serr || !st.isFile()) { res.writeHead(404, { 'Content-Type': 'text/plain' }); return res.end('Not found'); }
+    const type = TYPES[path.extname(file).toLowerCase()] || 'application/octet-stream';
+    const etag = 'W/"' + st.size.toString(16) + '-' + Math.floor(st.mtimeMs).toString(16) + '"';
+    /* pages, styles and scripts revalidate every visit (a deploy shows at once, unchanged files cost a 304);
+       pictures and fonts are kept for a day */
+    const headers = {
+      'Content-Type': type, ETag: etag, 'Last-Modified': st.mtime.toUTCString(),
+      'Cache-Control': /^(image|font)\//.test(type) ? 'public, max-age=86400' : 'no-cache',
+      'X-Content-Type-Options': 'nosniff', Vary: 'Accept-Encoding'
+    };
+    if (/\.zip$/i.test(file)) { headers['Content-Disposition'] = 'attachment; filename="' + path.basename(file) + '"'; headers['Cache-Control'] = 'no-cache'; }
+    if (req.headers['if-none-match'] === etag) { res.writeHead(304, headers); return res.end(); }
+    fs.readFile(file, (err, data) => {
+      if (err) { res.writeHead(404, { 'Content-Type': 'text/plain' }); return res.end('Not found'); }
+      const accept = String(req.headers['accept-encoding'] || '');
+      const enc = COMPRESSIBLE.test(type) && data.length > 1024 ? (/\bbr\b/.test(accept) ? 'br' : /\bgzip\b/.test(accept) ? 'gzip' : null) : null;
+      if (enc) {
+        const key = file + '|' + enc, hit = zcache.get(key);
+        let body = hit && hit.etag === etag ? hit.body : null;
+        if (!body) {
+          body = enc === 'br'
+            ? zlib.brotliCompressSync(data, { params: { [zlib.constants.BROTLI_PARAM_QUALITY]: 9, [zlib.constants.BROTLI_PARAM_SIZE_HINT]: data.length } })
+            : zlib.gzipSync(data, { level: 9 });
+          zcache.set(key, { etag, body });
+        }
+        headers['Content-Encoding'] = enc;
+        headers['Content-Length'] = body.length;
+        res.writeHead(200, headers);
+        return res.end(req.method === 'HEAD' ? undefined : body);
+      }
+      headers['Content-Length'] = data.length;
+      res.writeHead(200, headers);
+      res.end(req.method === 'HEAD' ? undefined : data);
+    });
   });
 }
 

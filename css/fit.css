@@ -1,0 +1,104 @@
+/* ==========================================================================
+   Fit: every section sized against the screen's height as well as its width,
+   so each one fits a laptop (from 1280x720) or a phone (from 360x640) without
+   being cut. Loaded last. Sizes use svh, so phone browser bars are allowed for.
+   ========================================================================== */
+
+/* ---------------- hero: the type and the gaps shrink with a short screen ---------------- */
+.hx { padding-top: clamp(80px, 12svh, 150px); padding-bottom: clamp(28px, 5svh, 80px); }
+.hx-h1 { font-size: clamp(36px, min(6.4vw, 10svh), 92px); }
+.hx-sub { margin-top: clamp(14px, 2.6svh, 32px); }
+.hx-form { margin-top: clamp(18px, 3.4svh, 40px); }
+.hx-stats { margin-top: clamp(24px, 5svh, 72px); }
+.hx-label { margin-top: clamp(20px, 4svh, 60px); }
+.hx-label + .hx-sites { margin-top: clamp(8px, 1.4svh, 14px); }
+
+/* ---------------- laptops and up ---------------- */
+@media (min-width: 900px) {
+  /* the extension drawing is never taller than the screen allows */
+  .ext { padding-block: clamp(40px, 7svh, 112px); }
+  .ext-pic { width: min(100%, calc((100svh - 150px) * 1.176)); justify-self: end; }
+  .ext-copy h2 { font-size: clamp(34px, min(4.4vw, 8svh), 68px); }
+  .ext-copy > p { margin-bottom: clamp(16px, 3svh, 28px); }
+  .ext-actions { margin-bottom: clamp(18px, 4svh, 36px); }
+
+  /* why: the two drawings take their height from the screen, not from the column */
+  .why-woman { aspect-ratio: auto; height: clamp(240px, 44svh, 560px); }
+  .why-gold { aspect-ratio: auto; height: clamp(300px, calc(100svh - 140px), 820px); }
+  .why-copy p { margin-bottom: clamp(20px, 4svh, 40px); }
+
+  /* the four steps never ask for more than the screen */
+  .field { min-height: min(84svh, 860px); }
+}
+
+/* very short laptop screens (768 tall and under): tighten the vertical rhythm */
+@media (min-width: 900px) and (max-height: 800px) {
+  .hx-sub { font-size: 17px; line-height: 1.45; }
+  .hx-stats b { font-size: 26px; }
+  .band-in { min-height: 0; padding-block: clamp(16px, 2.6svh, 28px); }
+}
+
+/* ---------------- phones and tablets ---------------- */
+@media (max-width: 899px) {
+  .hx { min-height: 100svh; padding-top: clamp(76px, 11svh, 112px); padding-bottom: clamp(20px, 4svh, 48px); }
+  .hx-h1 { font-size: clamp(34px, min(10.5vw, 7.4svh), 64px); }
+  .hx-sub { font-size: clamp(15px, 2.2svh, 18px); }
+  .hx-form .btn { height: 44px; }
+  .hx-form input[type="text"] { height: 40px; }
+  .hx-stats { margin-top: clamp(18px, 4svh, 48px); }
+  .hx-stats b { font-size: clamp(20px, 3svh, 28px); }
+
+  /* extension: the copy, then a drawing no taller than half the screen */
+  .ext { padding-block: clamp(40px, 7svh, 72px); }
+  .ext-copy h2 { font-size: clamp(30px, min(8.4vw, 5.4svh), 52px); }
+  .ext-copy > p { font-size: 16px; margin-bottom: 20px; }
+  .ext-actions { margin-bottom: 20px; }
+  .ext-pic { width: min(100%, calc(48svh * 1.176)); margin: 28px auto 0; }
+
+  /* why: both drawings share one screen */
+  .why { row-gap: 16px; }
+  .why-copy p { margin-bottom: 16px; }
+  .why-woman, .why-gold { aspect-ratio: auto; grid-column: 1 / -1; }
+  .why-woman { height: min(34svh, 520px); }
+  .why-gold { height: min(34svh, 520px); }
+
+  /* tested on: a compact two-column board */
+  .proof { margin-top: clamp(64px, 10svh, 120px); }
+  .tile { aspect-ratio: auto; min-height: clamp(88px, 12svh, 150px); }
+  .tile-head { min-height: 0; }
+  .tile-pic { grid-column: auto; aspect-ratio: auto; min-height: 0; }
+
+  /* the four steps: each one a screen at most */
+  .field { min-height: min(64svh, 560px); }
+}
+
+/* the install steps fold away on phones (open by default everywhere else) */
+.ext-how summary { cursor: pointer; font-size: 16px; font-weight: 600; color: var(--text); list-style: none; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; }
+.ext-how summary::-webkit-details-marker { display: none; }
+.ext-how summary::after { content: ''; width: 8px; height: 8px; border: solid currentColor; border-width: 0 2px 2px 0; rotate: 45deg; translate: 0 -2px; transition: rotate 200ms ease; }
+.ext-how[open] summary::after { rotate: 225deg; translate: 0 2px; }
+.ext-how[open] summary { margin-bottom: 8px; }
+@media (min-width: 900px) { .ext-how summary { display: none; } }
+
+/* short phones (700 tall and under): a smaller extension drawing */
+@media (max-width: 899px) and (max-height: 700px) {
+  .ext-pic { width: min(100%, calc(32svh * 1.176)); margin-top: 20px; }
+  .ext { padding-block: 32px; }
+}
+
+/* phones: each tested site is one compact row, name left and result right */
+@media (max-width: 519px) {
+  .tile:not(.tile-head):not(.tile-pic) { min-height: 0; flex-direction: row; align-items: baseline; justify-content: space-between; gap: 12px; padding: 14px 16px; }
+  .tile:not(.tile-head):not(.tile-pic) b { font-size: 18px; }
+  .tile-pic { aspect-ratio: auto; height: min(30svh, 260px); }
+  .proof { margin-top: clamp(48px, 8svh, 96px); }
+}
+/* the install label sits on the amber field: it takes the field ink */
+.ext .ext-how summary { color: var(--on-field); }
+
+/* short phones: slimmer feature bands and a tighter extension paragraph */
+@media (max-width: 899px) and (max-height: 700px) {
+  .band-in { min-height: 108px; padding-block: 16px; }
+  .ext-copy > p { font-size: 15px; line-height: 1.45; }
+  .ext-copy h2 { margin-bottom: 12px; }
+}

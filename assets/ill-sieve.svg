@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 800" font-family="Switzer, 'Segoe UI', Inter, Arial, sans-serif">
+  <title>What comes out: the sieve keeps the rows and lets ads, menus and pop-ups fall through</title>
+  <defs>
+    <pattern id="mesh" width="22" height="22" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <path d="M0 0h22M0 0v22" stroke="#32BFDA" stroke-width="2.4"/>
+    </pattern>
+    <clipPath id="bowl"><path d="M150 230h420l-60 150H210z"/></clipPath>
+  </defs>
+  <rect width="1000" height="800" fill="#0b0b0b"/>
+  <text x="64" y="84" font-size="26" font-weight="600" fill="#f2f2f2">What comes out</text>
+  <text x="64" y="116" font-size="17" fill="#8a8a8a">The rows stay. Everything else falls through.</text>
+
+  <!-- page pieces dropping in -->
+  <g opacity=".95">
+    <rect x="196" y="150" width="120" height="44" rx="10" fill="#1d1d1d" stroke="#333" stroke-dasharray="5 5" stroke-width="2" transform="rotate(-8 256 172)"/>
+    <text x="256" y="178" font-size="13" fill="#5c5c5c" text-anchor="middle" transform="rotate(-8 256 172)">AD</text>
+    <rect x="344" y="164" width="104" height="40" rx="10" fill="#1c1c1c" stroke="#32BFDA" stroke-width="2" transform="rotate(5 396 184)"/>
+    <rect x="358" y="180" width="54" height="9" rx="4.5" fill="#e6e6e6" transform="rotate(5 396 184)"/>
+    <rect x="466" y="146" width="84" height="34" rx="17" fill="#2a2a2a" transform="rotate(12 508 163)"/>
+  </g>
+
+  <!-- the sieve: rim, mesh bowl, handle -->
+  <path d="M570 236h250" stroke="#2c2c2c" stroke-width="18" stroke-linecap="round"/>
+  <path d="M150 230h420l-60 150H210z" fill="#101010"/>
+  <rect x="140" y="220" width="460" height="170" fill="url(#mesh)" clip-path="url(#bowl)" opacity=".85"/>
+  <path d="M150 230h420l-60 150H210z" fill="none" stroke="#32BFDA" stroke-width="4" stroke-linejoin="round"/>
+  <rect x="136" y="220" width="448" height="20" rx="10" fill="#32BFDA"/>
+
+  <!-- what the sieve holds -->
+  <g>
+    <rect x="232" y="262" width="256" height="30" rx="8" fill="#f2f2f2"/><rect x="246" y="273" width="100" height="9" rx="4.5" fill="#0a0a0a"/><rect x="430" y="273" width="44" height="9" rx="4.5" fill="#087b92"/>
+    <rect x="246" y="302" width="230" height="30" rx="8" fill="#f2f2f2"/><rect x="260" y="313" width="120" height="9" rx="4.5" fill="#0a0a0a"/><rect x="418" y="313" width="44" height="9" rx="4.5" fill="#087b92"/>
+  </g>
+
+  <!-- what falls through -->
+  <g>
+    <rect x="236" y="452" width="62" height="24" rx="6" fill="#1d1d1d" stroke="#333" stroke-width="2" transform="rotate(-18 267 464)"/>
+    <circle cx="352" cy="500" r="11" fill="#2a2a2a"/>
+    <rect x="404" y="470" width="70" height="22" rx="11" fill="#2a2a2a" transform="rotate(22 439 481)"/>
+    <rect x="290" y="560" width="48" height="16" rx="4" fill="#262626" transform="rotate(30 314 568)"/>
+    <circle cx="452" cy="590" r="7" fill="#333"/>
+    <rect x="364" y="626" width="40" height="14" rx="4" fill="#222" transform="rotate(-25 384 633)"/>
+    <path d="M268 410v24M352 410v40M440 410v30" stroke="#333" stroke-width="2" stroke-dasharray="4 6"/>
+  </g>
+  <g font-size="15" fill="#6b6b6b">
+    <text x="164" y="704">ads · menus · pop-ups · cookie bars · scripts</text>
+  </g>
+
+  <!-- arrow to the clean table -->
+  <path d="M612 300C680 300 690 360 690 420" fill="none" stroke="#FCC55F" stroke-width="3" stroke-linecap="round"/>
+  <path d="M678 408l12 14 12-14" fill="none" stroke="#FCC55F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- the table that comes out -->
+  <g>
+    <rect x="600" y="440" width="340" height="280" rx="18" fill="#f6f6f6"/>
+    <rect x="600" y="440" width="340" height="52" rx="18" fill="#FCC55F"/><rect x="600" y="470" width="340" height="22" fill="#FCC55F"/>
+    <text x="624" y="473" font-size="16" font-weight="600" fill="#0a0a0a">name</text><text x="916" y="473" font-size="16" font-weight="600" fill="#0a0a0a" text-anchor="end">price</text>
+    <g font-size="17" fill="#1a1a1a">
+      <text x="624" y="532">Desk lamp</text><text x="916" y="532" text-anchor="end">39.00</text>
+      <text x="624" y="580">Monitor riser</text><text x="916" y="580" text-anchor="end">54.50</text>
+      <text x="624" y="628">Cable tray</text><text x="916" y="628" text-anchor="end">18.90</text>
+      <text x="624" y="676">Mouse</text><text x="916" y="676" text-anchor="end">47.00</text>
+    </g>
+    <path d="M620 548h300M620 596h300M620 644h300" stroke="#e0e0e0" stroke-width="1.5"/>
+  </g>
+</svg>

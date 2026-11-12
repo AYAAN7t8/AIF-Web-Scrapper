@@ -32,7 +32,7 @@
     });
     el.setAttribute('data-words', '');
   }
-  var statements = ['.band-s', '.ext-copy h2', '.why-copy h2', '.why-copy p', '.cta-form h2', '.states h2'];
+  var statements = ['.band-s', '.ext-copy h2', '.why-copy h2', '.why-copy p', '.cta-form h2'];
   statements.forEach(function (sel) { $$(sel).forEach(splitWords); });
 
   /* ---- 2. one observer starts everything that is triggered ---- */

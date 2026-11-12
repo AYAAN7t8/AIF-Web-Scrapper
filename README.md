@@ -23,7 +23,7 @@ Black ground with four signal colours taken from the brand picture: coral `#FF5E
 
 Scroll motion lives in `css/motion.css` and `js/motion.js`: the hero dots drift with the reel, statements rise word by word, each feature band floods with its colour and flips its switch as it reaches the reading line, the four fields and their cards rise into place, the row states slide in from alternating sides, photographs wipe in and drift, proof numbers count up, and the closing blank opens like a shutter. Scrubbed parts use CSS scroll-driven animations (`animation-timeline: view()`) with a fade-up fallback; everything honours reduced motion.
 
-Photographs: free-to-use images from Pexels (credited in the page footer).
+Pictures: drawn for Sieve as SVG in `assets/ill-*.svg`, each one explains its section (the extension, export, what goes in, what comes out).
 
 ## Pages
 

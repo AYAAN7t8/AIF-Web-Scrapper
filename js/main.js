@@ -372,7 +372,7 @@
     ['bulk.html', 'Bulk Scrape', 'bulk'],
     ['how-it-works.html', 'How It Works', 'how'],
     ['docs.html', 'Docs', 'docs'],
-    ['index.html#extension', 'Extension', 'ext']
+    ['index.html#extension', 'Download Extension', 'ext']
   ];
 
   function themeButton() {
@@ -404,6 +404,11 @@
     if (footHost) {
       footHost.outerHTML =
         '<footer class="footer">' +
+        '<div class="foot-contact"><p>Questions, ideas or a site that will not scrape?</p>' +
+        '<div class="foot-contact-links">' +
+        '<a href="mailto:ayaaninframes@gmail.com"><span data-icon="mail" data-size="18"></span>ayaaninframes@gmail.com</a>' +
+        '<a href="https://www.instagram.com/ayaaninframes/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.3" cy="6.7" r="1.2" fill="currentColor"/></svg>@ayaaninframes on Instagram</a>' +
+        '</div></div>' +
         '<div class="foot-line"><span>Sieve: scrape what you see</span>' +
         '<nav aria-label="Footer"><a href="app.html">Scraper</a><a href="docs.html">Docs</a><a href="index.html#extension">Extension</a><a href="' + Sieve.config.issueUrl + '">Report an issue</a></nav>' +
         '<span>&copy; 2026 &middot; <a href="docs.html#cors">Privacy</a></span></div></footer>';

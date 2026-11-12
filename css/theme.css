@@ -182,3 +182,13 @@ main p, main li { max-width: 70ch; }
 .status-pill, .chip { border-radius: var(--radius-chip); }
 h1 { letter-spacing: -0.04em; }
 body:not([data-page="home"]) .page-head h1, body:not([data-page="home"]) .docs-hero h1, body:not([data-page="home"]) main > section:first-child h1 { font-size: clamp(36px, 4.4vw, 64px); line-height: 1.02; }
+
+/* contact, above the footer line on every page */
+.foot-contact { display: flex; align-items: center; justify-content: space-between; gap: 16px 32px; flex-wrap: wrap; margin: clamp(80px, 22svh, 200px) var(--margin) 0; padding: 28px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.foot-contact p { margin: 0; font-size: clamp(20px, 2vw, 28px); font-weight: 600; letter-spacing: -0.02em; color: var(--text); }
+.foot-contact-links { display: flex; gap: 12px; flex-wrap: wrap; }
+.foot-contact-links a { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 18px; border-radius: 999px; background: var(--surface); color: var(--text); text-decoration: none; font-size: 16px; transition: background-color 200ms ease, color 200ms ease; }
+.foot-contact-links a:hover { background: var(--primary); color: var(--on-primary); }
+.foot-contact-links a:active { transform: scale(.97); }
+.foot-contact + .foot-line { margin-top: 28px; }
+@media (max-width: 760px) { .foot-contact-links a { width: 100%; justify-content: flex-start; } .foot-contact-links { width: 100%; } }
