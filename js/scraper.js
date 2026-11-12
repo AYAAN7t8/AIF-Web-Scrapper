@@ -33,6 +33,9 @@
   }
 
   /* --------------------------------------------------------------- proxy conf */
+  /* Running as a Chrome extension page: fetches carry the user's own cookies (host permission required),
+     so pages behind a login return exactly what the user sees. On the website, credentials are never sent. */
+  var IN_EXT = /^(chrome|moz)-extension:$/.test(location.protocol);
   var autoProxy = null; // { url } when a Sieve server answers on this origin (or on the default port)
   var proxy = {
     get: function () {
@@ -42,6 +45,7 @@
     },
     /** Resolves once the same-origin / default-port proxy probe has finished. */
     ready: (function () {
+      if (IN_EXT) return Promise.resolve();
       var cands = [];
       if (/^https?:$/.test(location.protocol)) cands.push(location.origin);
       cands.push(Sieve.config.defaultProxy);
@@ -90,7 +94,7 @@
 
   function directFetch(url, o) {
     var ms = o.timeout || 15000, link = linkedAbort(o.signal, ms), t0 = performance.now();
-    return fetch(url, { signal: link.signal, credentials: 'omit', redirect: 'follow', referrerPolicy: 'no-referrer' })
+    return fetch(url, { signal: link.signal, credentials: IN_EXT ? 'include' : 'omit', redirect: 'follow', referrerPolicy: 'no-referrer' })
       .then(function (resp) {
         if (!resp.ok) throw ScrapeError('http', 'The server answered ' + resp.status + (resp.statusText ? ' ' + resp.statusText : '') + '.', { status: resp.status });
         var ct = resp.headers.get('content-type') || '';
@@ -907,6 +911,7 @@
     TABLE_THRESHOLD: TABLE_THRESHOLD,
     ScrapeError: ScrapeError,
     proxy: proxy,
+    inExtension: IN_EXT,
     fetchHtml: fetchHtml,
     parseHtml: parseHtml,
     effectiveBase: effectiveBase,

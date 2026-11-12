@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sieve</title>
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="popup.css">
+  <script src="../js/theme-init.js"></script>
+</head>
+<body>
+  <header class="pop-head">
+    <img src="../assets/logo.svg" width="22" height="22" alt="">
+    <strong>Sieve</strong>
+    <span class="muted text-xs">scrape what you see</span>
+  </header>
+
+  <section class="pop-card">
+    <label class="pop-label" for="mode">What to extract</label>
+    <select id="mode" class="input"></select>
+    <label class="pop-check"><input type="checkbox" id="autoscroll"> Scroll to the bottom first <span class="muted">(infinite feeds)</span></label>
+    <button id="scrape" class="btn btn-primary pop-wide" type="button">Scrape this page</button>
+    <p class="pop-note">Reads the page in your current tab, exactly as you see it, including anything behind your login.</p>
+  </section>
+
+  <section class="pop-card">
+    <label class="pop-label" for="link">Or fetch a link</label>
+    <div class="pop-row">
+      <input id="link" class="input" type="url" placeholder="https://example.com/products" spellcheck="false">
+      <button id="fetch" class="btn" type="button">Fetch</button>
+    </div>
+    <p class="pop-note" id="perm-note">Fetching a link uses your own login cookies and needs one-time site access.</p>
+    <button id="allow" class="btn btn-sm pop-wide" type="button" hidden>Allow site access</button>
+  </section>
+
+  <p id="msg" class="pop-msg" role="status" hidden></p>
+  <footer class="pop-foot">
+    <a href="../app.html" id="open-app" target="_blank">Open Sieve</a> · <a href="../bulk.html" id="open-bulk" target="_blank">Bulk</a>
+    <span class="muted">· Only scrape what you are allowed to.</span>
+  </footer>
+  <script src="popup.js"></script>
+</body>
+</html>

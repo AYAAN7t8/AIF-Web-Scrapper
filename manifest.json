@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "Sieve Web Scraper",
+  "version": "1.0.0",
+  "description": "Extract tables, emails, phones, links, images and more from the page you are viewing, including pages behind your login. Runs locally; nothing is uploaded.",
+  "minimum_chrome_version": "102",
+  "action": {
+    "default_title": "Sieve: scrape this page",
+    "default_popup": "ext/popup.html",
+    "default_icon": { "16": "ext/icons/icon16.png", "32": "ext/icons/icon32.png", "48": "ext/icons/icon48.png" }
+  },
+  "icons": { "16": "ext/icons/icon16.png", "48": "ext/icons/icon48.png", "128": "ext/icons/icon128.png" },
+  "permissions": ["activeTab", "scripting", "storage", "unlimitedStorage"],
+  "optional_host_permissions": ["http://*/*", "https://*/*"]
+}

@@ -92,6 +92,10 @@
       m = ['This site blocks automated scraping', (err.status === 429 ? 'The site says too many requests. Wait a while and retry with a longer delay. ' : 'The site answered ' + err.status + ': it uses bot protection or needs a login, and Sieve does not evade that. ') +
         'Open the page in your own browser, then use "Paste page HTML" (View Source, copy, paste) to extract the data you can already see. Or use the site\x27s official API/export.'];
     }
+    if (Sieve.scraper.inExtension) {
+      if (err.code === 'cors') m = ['Sieve needs access to that site', 'Chrome has not given the extension permission to read this site yet. Click "Allow site access" once (it lets Sieve fetch pages with your own login), then Fetch again. Or open the page in a tab and use the Sieve toolbar button.'];
+      else if (err.code === 'http' && [401, 403, 429, 503].indexOf(err.status) !== -1) m = ['The site refused the request', 'It answered ' + err.status + ' (login expired, rate limit or a bot check). Open the page in a normal tab, sign in or pass any check yourself, then click the Sieve toolbar button on that tab: Sieve reads the page you are looking at.'];
+    }
     $('#err-title').textContent = m[0];
     $('#err-msg').textContent = m[1];
     var open = $('#err-open');
@@ -496,6 +500,31 @@
     });
   }
 
+  /* ------------------------------------------------------------ extension mode */
+  function requestSiteAccess() {
+    if (!(window.chrome && chrome.permissions)) return;
+    chrome.permissions.request({ origins: ['<all_urls>'] }, function (ok) {
+      Sieve.toast(ok ? 'Site access granted. Press Fetch again.' : 'Access was not granted.', ok ? 'success' : 'warning', 4000);
+    });
+  }
+  /** Extension only: a page captured from the user's tab (with their login) is waiting in storage. */
+  function takePendingCapture() {
+    if (!(Sieve.scraper.inExtension && window.chrome && chrome.storage && chrome.storage.local)) return Promise.resolve(null);
+    return new Promise(function (resolve) {
+      chrome.storage.local.get('sievePending', function (r) {
+        var p = r && r.sievePending;
+        if (p) chrome.storage.local.remove('sievePending');
+        resolve(p && p.html ? p : null);
+      });
+    });
+  }
+  function initExtensionUi() {
+    if (!Sieve.scraper.inExtension) return;
+    document.documentElement.setAttribute('data-ext', '1');
+    var b = document.querySelector('[data-action="proxy-help"]');
+    if (b) { b.textContent = 'Allow site access'; b.setAttribute('data-action', 'ext-permission'); }
+  }
+
   function proxyHelp() {
     var m = Sieve.modal.open({
       title: 'Run the optional proxy', size: 'lg',
@@ -557,6 +586,7 @@
         var act = a.getAttribute('data-action');
         if (act === 'paste-html') pasteHtmlDialog();
         else if (act === 'proxy-help') proxyHelp();
+        else if (act === 'ext-permission') requestSiteAccess();
       }
       var v = e.target.closest('[data-view]');
       if (v) { S.view = v.getAttribute('data-view'); updateViewChrome(); renderAlt(); }
@@ -684,6 +714,15 @@
       if (params.get('autorun') === '1') run({ url: u });
     }
     if (params.get('pane') === 'bulk') setPane('bulk');
+    initExtensionUi();
+    if (params.get('ext') === '1') {
+      takePendingCapture().then(function (p) {
+        if (!p) return;
+        $('#url-input').value = p.url || '';
+        Sieve.toast('Reading the page you were viewing…', 'info', 2500);
+        run({ url: p.url, html: p.html });
+      });
+    }
   });
 
   Sieve.app = { state: S, run: run, setMode: setMode };

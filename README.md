@@ -69,6 +69,25 @@ Code: `js/scraper.js`.
 ### Pagination (`findNext`)
 In priority order: `<link rel=next>`/`a[rel~=next]` → `aria-label~="next"` → pagination wrappers (`.next`, or the item after the active page) → short link text matching `next | → | » | siguiente | suivant | weiter | …`. Disabled items, the current URL, already-visited URLs and other domains are skipped. A "Next" `<button>` without an href is reported as *needs JavaScript*.
 
+## Chrome extension: scrape what *you* see, including logged-in pages
+
+A website can never read your logged-in session on another site (browsers forbid it, and a server never has your cookies). A browser extension can, because it runs inside your own browser. This repo is **both** the website and a Manifest V3 extension (`manifest.json` at the root, popup in `ext/`).
+
+**Install (unpacked, ~1 minute)**
+
+1. Chrome → `chrome://extensions` → switch on **Developer mode**.
+2. **Load unpacked** → choose this repository folder (the one containing `manifest.json`).
+3. Pin the **Sieve** icon.
+
+**Use it**
+
+- **Scrape this page**: log in to the site as usual, open the page you want, click the Sieve icon, pick *Auto table*, *Emails*, … and press **Scrape this page**. Sieve reads the page exactly as rendered in your tab (so JavaScript-built pages and anything behind your login work), and opens the results with all the usual column editing and CSV/XLSX/Sheets export. Tick *Scroll to the bottom first* for infinite feeds.
+- **Fetch a link**: paste a URL in the popup and press Fetch. Click **Allow site access** once; after that Sieve fetches links with *your own cookies*, follows pagination (`Crawl all pages`) and runs Bulk, all as you.
+
+**What it does not do:** it does not solve CAPTCHAs or bot checks, and it does not log in for you. If a site shows a check or a login wall, pass it yourself in a normal tab, then use *Scrape this page*. Only scrape pages and data you are allowed to use.
+
+Privacy: everything is processed in your browser. Permissions are `activeTab`, `scripting`, `storage`, and optional site access that you grant yourself.
+
 ## Deploy on Render
 
 The repo includes `render.yaml`, and the server needs **no dependencies**, so it deploys as a plain Node web service.

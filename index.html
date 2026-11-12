@@ -6,7 +6,7 @@
   <title>Sieve — Scrape any website, instantly</title>
   <meta name="description" content="AI table detection, email and phone extraction, bulk URLs and CSV/Excel/Sheets export. Sieve runs entirely in your browser.">
   <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
-  <script>try{var t=localStorage.getItem('sieve.theme');t=t?JSON.parse(t):(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+  <script src="js/theme-init.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -147,16 +147,6 @@
   <div id="site-footer"></div>
 
   <script src="js/main.js"></script>
-  <script>
-    Sieve.ready(function () {
-      document.getElementById('hero-form').addEventListener('submit', function (e) {
-        e.preventDefault();
-        var raw = document.getElementById('hero-url').value.trim();
-        var url = raw ? Sieve.util.normalizeUrl(raw) : '';
-        if (raw && !url) { Sieve.toast('That does not look like a valid http(s) URL.', 'error'); return; }
-        location.href = 'app.html' + (url ? '?autorun=1&url=' + encodeURIComponent(url) : '');
-      });
-    });
-  </script>
+  <script src="js/home.js"></script>
 </body>
 </html>

@@ -6,7 +6,7 @@
   <title>Scraper — Sieve</title>
   <meta name="description" content="Sieve scraper workspace: auto table detection, email, phone, links, images, reviews, people, business, social and B2B extraction — all in your browser.">
   <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
-  <script>try{var t=localStorage.getItem('sieve.theme');t=t?JSON.parse(t):(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+  <script src="js/theme-init.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -220,8 +220,8 @@
   </footer>
   <div class="scrim" id="scrim"></div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" defer></script>
+  <script src="vendor/jszip.min.js" defer></script>
+  <script src="vendor/xlsx.full.min.js" defer></script>
   <script src="js/main.js"></script>
   <script src="js/demo.js"></script>
   <script src="js/extractors.js"></script>
